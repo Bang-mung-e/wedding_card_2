@@ -905,8 +905,8 @@
     <!-- 지도 영역 -->
     <div id="map" class="map-box" style="width:100%; height:250px; margin:20px 0; border-radius:8px; overflow:hidden; border:1px solid #333333;"></div>
 
-    <!-- 네이버 지도 빠른 길찾기 버튼 -->
-    <a href="https://map.naver.com/v5/search/%EC%9B%94%EB%93%9C%EC%BB%B5%EC%BB%A8%EB%B2%A4%EC%85%98/place/13548981" target="_blank" class="map-btn" style="background-color: #03C75A; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold;">
+        <!-- 네이버 지도 검색 연동 버튼 -->
+    <a href="https://m.map.naver.com/search2/search.naver?query=%EC%9B%94%EB%93%9C%EC%BB%B5%EC%BB%A8%EB%B2%A4%EC%85%98" target="_blank" class="map-btn" style="background-color: #03C75A; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold;">
         💚 네이버 지도로 빠른 길찾기
     </a>
 
@@ -950,8 +950,7 @@
 
 <!-- [중요] callback=initMap 을 추가하여 API 로드 완료 후 initMap 실행 -->
 <!-- YOUR_CLIENT_ID 부분을 발급받으신 실제 Client ID로 꼭 교체하세요 -->
-<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=b379m8apqj&callback=initMap"></script>
-
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=b379m8apqj"></script>
     <!-- 7. 마음 전하실 곳 (Account) 섹션 -->
     <section class="section account-section">
         <h2 class="section-title">Account</h2>
