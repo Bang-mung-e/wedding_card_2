@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Wedding - 모바일 청첩장</title>
+    <!-- 구글 폰트 불러오기 (영문 세리프 및 기본 한글 서체) -->
+    <link href="https://fonts.bunny.net/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=abhaya-libre:400|aguafina-script:400|alex-brush:400|ballet:400" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=abhaya-libre:400|actor:400|aguafina-script:400|alex-brush:400|ballet:400" rel="stylesheet" />
+    
+    <style>
+        /* --- 1. 기본 초기화 및 전체 화면 배경 설정 --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: radial-gradient(circle, #fbc7d4 0%, #9796f0 100%);
+            background-attachment: fixed;
+            font-family: 'Noto Sans KR', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- 2. 실제 모바일 청첩장 컨테이너 (가운데 블랙 테마 영역) --- */
+        #wedding-card {
+            width: 100%;
+            max-width: 450px; /* 모바일 기기 화면 폭에 맞춤 */
+            min-height: 100vh;
+            background-color: #000000; /* 깊이감 있는 완전 블랙 */
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.4); 
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 공통 섹션 스타일 */
+        img {
+            width: 100%;
+            display: block;
+        }
+        .section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .section-title {
+            font-family: 'Abhaya Libre', serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        /* --- 3. 메인 커버 섹션 스타일 --- */
+        .cover-section {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background-color: #000000;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .main-photo-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                        rgba(0, 0, 0, 0.6) 0%, 
+                        rgba(0, 0, 0, 0.1) 40%, 
+                        rgba(0, 0, 0, 0.8) 80%, 
+                        rgba(0, 0, 0, 1) 100%);
+            z-index: 2;
+        }
+
+        .main-title-first {
+            font-family: 'Actor', sans-serif;
+            font-size: 0.8rem;
+            color: #ff8fa3;
+            position: absolute;
+            top: 42px;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .main-title {
+            font-family: 'Alex Brush', handwriting;
+            font-size: 2.8rem;
+            color: #ff8fa3;
+            position: absolute;
+            top: 55px;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .name-overlay {
+            position: absolute;
+            top: 250px;
+            z-index: 10;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.65rem;
+            line-height: 1.4;
+            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.8);
+        }
+        .name-overlay strong {
+            display: block;
+            font-family: 'Alex Brush', handwriting;
+            font-style: italic;
+            font-size: 0.90rem;
+            font-weight: 500;
+        }
+        .groom-name {
+            font-family: 'Alex Brush', handwriting;
+            font-style: italic;
+            left: 50px;
+            top: 300px;
+            text-align: left;
+        }
+        .bride-name {
+            font-family: 'Alex Brush', handwriting;
+            font-style: italic;
+            right: 50px;
+            top: 150px;
+            text-align: right;
+        }
+
+        .main-info {
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            padding: 0 20px;
+        }
+        .date-badge {
+            border: 1px solid #ff8fa3;
+            padding: 4px 15px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 12px;
+            color: #ff8fa3;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .main-date {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+        .main-venue {
+            font-size: 0.95rem;
+            color: #cccccc;
+            margin-top: 6px;
+        }
+        .main-address {
+            font-size: 0.8rem;
+            color: #777777;
+            margin-top: 4px;
+        }
+
+        /* --- 4. 초대글 섹션 스타일 --- */
+        .intro-section {
+            background-color: #000000;
+            line-height: 1.2;
+        }
+        .intro-handwritten-sample {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-bottom: 40px;
+            word-break: keep-all;
+            line-height: 1.8;
+        }
+        .names {
+            font-size: 1rem;
+            margin-top: 30px;
+        }
+        .names div {
+            margin: 15px 0;
+        }
+        .names span {
+            display: block;
+            font-size: 0.8rem;
+            color: #888888;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        /* --- 5. 어린 시절 (Childhood) 섹션 스타일 --- */
+        .childhood-section {
+            background-color: #eab4b9; /* 화사하고 따뜻한 인디핑크 배경 */
+            color: #333333;
+            padding: 50px 90px;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .child-block {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .child-title-modern {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: #111111;
+            margin-bottom: 250px;
+            letter-spacing: 0.5px;
+        }
+
+        .child-img-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .child-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-relation-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 5;
+            color: #ffffff;
+            text-align: left;
+            line-height: 1.5;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 0, 0, 0.8);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+        }
+        .photo-relation-overlay span {
+            display: block;
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .handwriting-wrapper {
+            position: absolute;
+            z-index: 10;
+            width: 85%;
+            max-width: 280px;
+            pointer-events: none;
+        }
+
+        .groom-handwriting {
+            top: -40px;
+            right: 150px;
+        }
+
+        .bride-handwriting {
+            top: -40px;
+            right: 150px;
+        }
+
+        .handwriting-img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.1));
+        }
+
+        /* --- 6. 콜라주 뷰 형태의 갤러리 섹션 --- */
+        .gallery-section {
+            background-color: #000000;
+            padding: 60px 16px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+            width: 100%;
+        }
+
+        .grid-item {
+            position: relative;
+            grid-column: span 2;
+            aspect-ratio: 1 / 1; 
+            overflow: hidden;
+            border-radius: 2px;
+            cursor: pointer;
+            background-color: #111111;
+            transition: transform 0.2s ease;
+        }
+
+        .grid-item.is-hidden {
+            display: none;
+        }
+
+        .grid-item.tall {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: 1 / 2;
+        }
+
+        .grid-item.wide {
+            grid-column: span 4;
+            aspect-ratio: 2 / 1;
+        }
+
+        .grid-item.wide2 {
+            grid-column: span 6;
+            aspect-ratio: 3 / 2;
+        }
+
+        .grid-item.wide3 {
+            grid-column: span 3;
+            aspect-ratio: 1 / 1;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .grid-item:active {
+            transform: scale(0.97);
+        }
+
+        .gallery-more-btn {
+            background: none;
+            border: 1px solid #333333;
+            color: #888888;
+            padding: 12px 0;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .gallery-more-btn:active {
+            background-color: #222222;
+            color: #ffffff;
+        }
+
+        /* --- 7. 달력 (Calendar) 섹션 스타일 --- */
+        .calendar-section {
+            background-color: #000000;
+            padding: 60px 20px;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .calendar-header {
+            margin-bottom: 30px;
+        }
+
+        .calendar-header-date {
+            font-family: 'Abhaya Libre', serif;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 2px;
+        }
+
+        .calendar-header-time {
+            font-family: 'Poppins', sans-serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #ff8fa3;
+            margin-top: 6px;
+            letter-spacing: 1px;
+        }
+
+        .calendar-table {
+            width: 100%;
+            max-width: 340px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .calendar-table th {
+            padding-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #777777;
+            text-align: center;
+        }
+
+        .calendar-table th.sun { color: #ff8fa3; }
+        .calendar-table th.sat { color: #a0c4ff; }
+
+        .calendar-table td {
+            height: 45px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.95rem;
+            color: #dddddd;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+        }
+
+        .calendar-table td.sun { color: #ff8fa3; }
+        .calendar-table td.sat { color: #a0c4ff; }
+
+        /* 10월 18일 손글씨 하트 강조 스타일 */
+        .calendar-table td.selected {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .calendar-table td.selected::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 38px;
+            height: 38px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,88 C20,68 8,48 10,28 C12,12 28,6 42,18 C46,22 48,25 50,28 C52,25 54,22 58,18 C72,6 88,12 90,28 C92,48 80,68 50,88 Z' fill='none' stroke='%23ff8fa3' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' transform='rotate(-5 50 50)'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+        }
+
+        /* --- 8. 풀스냅 모달 팝업 레이어 --- */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10001;
+            width: 44px;
+            height: 44px;
+            line-height: 44px;
+        }
+
+        .modal-slider-viewport {
+            width: 100%;
+            max-width: 450px;
+            height: 80%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-slider-track {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+        }
+
+        .modal-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .modal-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .modal-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-nav-btn.prev { left: 10px; }
+        .modal-nav-btn.next { right: 10px; }
+        
+        .modal-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #888888;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            z-index: 10002;
+            background: rgba(0,0,0,0.4);
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+
+        /* --- 9. 오시는 길 (Location) 섹션 스타일 --- */
+        .location-section {
+            background-color: #000000;
+            border-top: 1px solid #1a1a1a;
+        }
+        .map-box {
+            width: 100%;
+            height: 220px;
+            background-color: #1a1a1a;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .map-placeholder {
+            color: #888888;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        .transport-info {
+            text-align: left;
+            margin-top: 30px;
+            background: #111111;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .transport-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #ff8fa3;
+            margin-bottom: 8px;
+        }
+        .transport-desc {
+            font-size: 0.8rem;
+            color: #aaaaaa;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .map-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #fee500; 
+            color: #191919;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+            transition: opacity 0.2s ease;
+        }
+        .map-btn:active {
+            opacity: 0.8;
+        }
+
+        /* --- 10. 마음 전하실 곳 (Account) 섹션 스타일 --- */
+        .account-section {
+            background-color: #111111;
+            padding-bottom: 100px;
+        }
+        .account-notice {
+            font-size: 0.85rem;
+            color: #999999;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .accordion-item {
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #1c1c1c;
+            border: 1px solid #2a2a2a;
+        }
+        .accordion-header {
+            width: 100%;
+            padding: 16px 20px;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .accordion-header::after {
+            content: '▼';
+            font-size: 0.7rem;
+            color: #ff8fa3;
+            transition: transform 0.3s ease;
+        }
+        .accordion-item.active .accordion-header::after {
+            transform: rotate(-180deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+            background-color: #161616;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+        }
+        .account-box {
+            padding: 20px;
+            text-align: left;
+            border-top: 1px solid #252525;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .account-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #cccccc;
+        }
+        .account-number {
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #ffffff;
+        }
+        .copy-btn {
+            background-color: #222222;
+            border: 1px solid #444444;
+            color: #ffffff;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .copy-btn:active {
+            background-color: #ff8fa3;
+            border-color: #ff8fa3;
+        }
+    </style>
+</head>
+<body>
+
+<div id="wedding-card">
+
+    <!-- 1. 메인 커버 섹션 -->
+    <section class="cover-section">
+        <h1 class="main-title-first">YOU'RE INVITED TO</h1>
+        <h1 class="main-title">Our Wedding</h1>
+        
+        <div class="name-overlay groom-name">신랑 <strong>방진수</strong></div>
+        <div class="name-overlay bride-name">신부 <strong>고지원</strong></div>
+
+        <div class="main-photo-container" style="background-image: url('main-photo.jpg');">
+            <div class="gradient-overlay"></div>
+        </div>
+
+        <div class="main-info">
+            <div class="date-badge">Save the date</div>
+            <p class="main-date">2026.10.18 Sun 01:30PM</p>
+            <p class="main-venue">WorldCup Convention 2층 임페리얼홀</p>
+            <p class="main-address">서울 마포구 월드컵로 240</p>
+        </div>
+    </section>
+
+    <!-- 2. 초대글 섹션 -->
+    <section class="section intro-section">
+        <div style="max-width: 250px; margin: 0 auto 40px auto; border: 1px solid #333; padding: 20px; font-size: 0.8rem; letter-spacing: 3px; color: #888;">
+            YOU'RE INVITED TO
+        </div>
+
+        <p class="intro-handwritten-sample">
+            7년 7개월 동안,<br>
+            서로를 바라보고 의지하던 두 사람이<br>
+            평생의 사랑을 약속하는 날.<br><br>
+            귀한 발걸음으로 오셔서<br>
+            축복해 주시고 함께해 주세요.
+        </p>
+
+        <div class="names">
+            <div>
+                <span>Groom</span>
+                <strong>방진수</strong>
+            </div>
+            <div style="margin-top: 25px;">
+                <span>Bride</span>
+                <strong>고지원</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 어린 시절(Childhood) 섹션 -->
+    <section class="section childhood-section">
+        <div class="child-block">
+            <h3 class="child-title-modern">Groom's Childhood</h3>
+            <div class="handwriting-wrapper groom-handwriting">
+                <img src="jinsu-handwriting.png" alt="신랑 손글씨 편지" class="handwriting-img">
+            </div>
+            <div class="child-img-wrapper">
+                <img src="child-jinsu.jpg" alt="신랑 어린 시절" class="child-photo">
+                <div class="photo-relation-overlay">
+                    방종관 & 윤순옥의
+                    <span>아들 진수</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="child-block">
+            <h3 class="child-title-modern">Bride's Childhood</h3>
+            <div class="handwriting-wrapper bride-handwriting">
+                <img src="jiwon-handwriting.png" alt="신부 손글씨 편지" class="handwriting-img">
+            </div>
+            <div class="child-img-wrapper">
+                <img src="child-jiwon.jpg" alt="신부 어린 시절" class="child-photo">
+                <div class="photo-relation-overlay">
+                    고영국 & 김순미의
+                    <span>딸 지원</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 갤러리 섹션 -->
+    <section class="section gallery-section" id="gallerySection">
+        <h2 class="section-title">Gallery</h2>
+        
+        <div class="gallery-grid" id="galleryGrid">
+            <div class="grid-item wide2" onclick="openModal(0)"><img src="slide1.jpg" alt="웨딩사진 1"></div>
+            <div class="grid-item" onclick="openModal(1)"><img src="slide2.jpg" alt="웨딩사진 2"></div>
+            <div class="grid-item" onclick="openModal(2)"><img src="slide3.jpg" alt="웨딩사진 3"></div>
+            
+            <div class="grid-item" onclick="openModal(3)"><img src="slide4.jpg" alt="웨딩사진 4"></div>
+            <div class="grid-item wide3" onclick="openModal(4)"><img src="slide5.jpg" alt="웨딩사진 5"></div>
+            
+            <div class="grid-item wide3" onclick="openModal(5)"><img src="slide6.jpg" alt="웨딩사진 6"></div>
+            <div class="grid-item tall" onclick="openModal(6)"><img src="slide7.jpg" alt="웨딩사진 7"></div>
+            <div class="grid-item tall" onclick="openModal(7)"><img src="slide8.jpg" alt="웨딩사진 8"></div>
+            
+            <div class="grid-item tall" onclick="openModal(8)"><img src="slide9.jpg" alt="웨딩사진 9"></div>
+            <div class="grid-item wide" onclick="openModal(9)"><img src="slide10.jpg" alt="웨딩사진 10"></div>
+            <div class="grid-item" onclick="openModal(10)"><img src="slide11.jpg" alt="웨딩사진 11"></div>
+
+            <div class="grid-item is-hidden" onclick="openModal(11)"><img src="slide12.jpg" alt="웨딩사진 12"></div>
+            <div class="grid-item is-hidden" onclick="openModal(12)"><img src="slide13.jpg" alt="웨딩사진 13"></div>
+            <div class="grid-item is-hidden" onclick="openModal(13)"><img src="slide14.jpg" alt="웨딩사진 14"></div>
+            <div class="grid-item is-hidden" onclick="openModal(14)"><img src="slide15.jpg" alt="웨딩사진 15"></div>
+            <div class="grid-item is-hidden" onclick="openModal(15)"><img src="slide16.jpg" alt="웨딩사진 16"></div>
+            <div class="grid-item is-hidden" onclick="openModal(16)"><img src="slide17.jpg" alt="웨딩사진 17"></div>
+            <div class="grid-item is-hidden" onclick="openModal(17)"><img src="slide18.jpg" alt="웨딩사진 18"></div>
+            <div class="grid-item is-hidden" onclick="openModal(18)"><img src="slide19.jpg" alt="웨딩사진 19"></div>
+            <div class="grid-item is-hidden" onclick="openModal(19)"><img src="slide20.jpg" alt="웨딩사진 20"></div>
+            <div class="grid-item is-hidden" onclick="openModal(20)"><img src="slide21.jpg" alt="웨딩사진 21"></div>
+            <div class="grid-item is-hidden" onclick="openModal(21)"><img src="slide22.jpg" alt="웨딩사진 22"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide23.jpg" alt="웨딩사진 23"></div>
+        </div>
+        
+        <button class="gallery-more-btn" id="moreBtn">사진 더보기 ▼</button>
+    </section>
+
+    <!-- 5. 달력 (Calendar) 섹션 -->
+    <section class="section calendar-section">
+        <div class="calendar-header">
+            <div class="calendar-header-date">2026.10.18. SUN</div>
+            <div class="calendar-header-time">01:30 PM</div>
+        </div>
+
+        <table class="calendar-table">
+            <thead>
+                <tr>
+                    <th class="sun">SUN</th>
+                    <th>MON</th>
+                    <th>TUE</th>
+                    <th>WED</th>
+                    <th>THU</th>
+                    <th>FRI</th>
+                    <th class="sat">SAT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td class="sat">3</td>
+                </tr>
+                <tr>
+                    <td class="sun">4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td class="sat">10</td>
+                </tr>
+                <tr>
+                    <td class="sun">11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td class="sat">17</td>
+                </tr>
+                <tr>
+                    <td class="sun selected">18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td class="sat">24</td>
+                </tr>
+                <tr>
+                    <td class="sun">25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td class="sat">31</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+<!-- 6. 오시는 길 (Location) 섹션 -->
+<section class="section location-section">
+    <h2 class="section-title">Location</h2>
+    
+    <p style="font-size: 1.05rem; font-weight: bold; color: #ffffff; margin-bottom: 6px;">월드컵컨벤션 2층 임페리얼홀</p>
+    <p style="font-size: 0.85rem; color: #888888;">서울 마포구 월드컵로 240</p>
+
+    <!-- 지도 영역 -->
+    <div id="map" class="map-box" style="width:100%; height:250px; margin:20px 0; border-radius:8px; overflow:hidden; border:1px solid #333333;"></div>
+
+    <!-- 네이버 지도 빠른 길찾기 버튼 -->
+    <a href="https://map.naver.com/v5/search/%EC%9B%94%EB%93%9C%EC%BB%B5%EC%BB%A8%EB%B2%A4%EC%85%98/place/13548981" target="_blank" class="map-btn" style="background-color: #03C75A; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold;">
+        💚 네이버 지도로 빠른 길찾기
+    </a>
+
+    <div class="transport-info">
+        <div class="transport-title">🚇 지하철 안내</div>
+        <p class="transport-desc">지하철 6호선 월드컵경기장역 1번 출구 도보 5분 거리</p>
+
+        <div class="transport-title">🚗 주차 및 차량 안내</div>
+        <p class="transport-desc" style="margin-bottom:0;">서울월드컵경기장 내 주차장 이용 가능 (하객 주차 등록 시 무료 주차 지원)</p>
+    </div>
+</section>
+
+<script>
+    // 지도 초기화 함수를 먼저 정의합니다.
+    function initMap() {
+        var mapContainer = document.getElementById('map');
+        if (!mapContainer) return;
+
+        var lat = 37.568249;
+        var lng = 126.897241;
+        var venueLocation = new naver.maps.LatLng(lat, lng);
+
+        var mapOptions = {
+            center: venueLocation,
+            zoom: 16,
+            zoomControl: true,
+            zoomControlOptions: {
+                position: naver.maps.Position.TOP_RIGHT
+            }
+        };
+
+        var map = new naver.maps.Map(mapContainer, mapOptions);
+
+        var marker = new naver.maps.Marker({
+            position: venueLocation,
+            map: map,
+            title: '월드컵컨벤션'
+        });
+    }
+</script>
+
+<!-- [중요] callback=initMap 을 추가하여 API 로드 완료 후 initMap 실행 -->
+<!-- YOUR_CLIENT_ID 부분을 발급받으신 실제 Client ID로 꼭 교체하세요 -->
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=b379m8apqj&callback=initMap"></script>
+
+    <!-- 7. 마음 전하실 곳 (Account) 섹션 -->
+    <section class="section account-section">
+        <h2 class="section-title">Account</h2>
+        <p class="account-notice">
+            축하의 마음을 전해주실 분들을 위해<br>계좌 정보를 안내해 드립니다.
+        </p>
+
+        <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                신랑측 계좌번호 보기
+            </button>
+            <div class="accordion-content">
+                <div class="account-box">
+                    <div class="account-row">
+                        <div>
+                            <span style="font-size:0.8rem; color:#888;">신한은행</span><br>
+                            <span class="account-number">110-123-456789</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyAccount('110123456789')">복사</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                신부측 계좌번호 보기
+            </button>
+            <div class="accordion-content">
+                <div class="account-box">
+                    <div class="account-row">
+                        <div>
+                            <span style="font-size:0.8rem; color:#888;">국민은행</span><br>
+                            <span class="account-number">910-987-654321</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyAccount('910987654321')">복사</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- 풀스크린 슬라이더 모달 레이어 -->
+<div id="galleryModal" class="gallery-modal">
+    <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+    
+    <button class="modal-nav-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="modal-nav-btn next" onclick="moveSlide(1)">&#10095;</button>
+    
+    <div class="modal-slider-viewport" id="modalViewport">
+        <div class="modal-slider-track" id="modalTrack"></div>
+    </div>
+    
+    <div class="modal-counter" id="modalCounter">1 / 13</div>
+</div>
+
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=b379m8apqj"></script>
+
+<script>
+    // 페이지 로드 후 네이버 지도 생성 및 마커 표시
+    document.addEventListener('DOMContentLoaded', function() {
+        // 월드컵컨벤션 위치 좌표
+        var lat = 37.568249;
+        var lng = 126.897241;
+        var venueLocation = new naver.maps.LatLng(lat, lng);
+
+        var mapOptions = {
+            center: venueLocation,
+            zoom: 16,
+            zoomControl: true, // 확대/축소 버튼 활성화
+            zoomControlOptions: {
+                position: naver.maps.Position.TOP_RIGHT
+            }
+        };
+
+        // 지도 생성
+        var map = new naver.maps.Map('map', mapOptions);
+
+        // 마커 생성
+        var marker = new naver.maps.Marker({
+            position: venueLocation,
+            map: map,
+            title: '월드컵컨벤션'
+        });
+    });
+</script>
+
+<script>
+    let currentSlideIdx = 0;
+    let totalSlides = 0;
+    let imagesArray = [];
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // 갤러리 내 모든 이미지 소스를 배열에 동적 매핑
+        const gridItems = document.querySelectorAll('.gallery-grid .grid-item img');
+        imagesArray = Array.from(gridItems).map(img => img.src);
+        totalSlides = imagesArray.length;
+
+        // 모달 내부 슬라이드 트랙 생성
+        const track = document.getElementById('modalTrack');
+        imagesArray.forEach((src, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'modal-slide';
+            slide.innerHTML = `<img src="${src}" alt="웨딩사진 확대 ${index + 1}">`;
+            track.appendChild(slide);
+        });
+
+        // '사진 더보기 / 접기' 토글 처리
+        const moreBtn = document.getElementById('moreBtn');
+        let isExpanded = false;
+
+        if (moreBtn) {
+            moreBtn.innerText = `사진 더보기 (${totalSlides}장 전체보기) ▼`;
+            moreBtn.addEventListener('click', function() {
+                const allItems = document.querySelectorAll('.gallery-grid .grid-item');
+                
+                if (!isExpanded) {
+                    allItems.forEach((item, idx) => {
+                        if (idx >= 11) {
+                            item.classList.remove('is-hidden');
+                        }
+                    });
+                    moreBtn.innerText = '사진 접기 ▲';
+                    isExpanded = true;
+                } else {
+                    allItems.forEach((item, idx) => {
+                        if (idx >= 11) {
+                            item.classList.add('is-hidden');
+                        }
+                    });
+                    moreBtn.innerText = `사진 더보기 (${totalSlides}장 전체보기) ▼`;
+                    isExpanded = false;
+
+                    document.getElementById('gallerySection').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+
+        // 모바일 스와이프 터치 이벤트 연동
+        const viewport = document.getElementById('modalViewport');
+        let startX = 0;
+        let endX = 0;
+
+        viewport.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+
+        viewport.addEventListener('touchend', function(e) {
+            endX = e.changedTouches[0].clientX;
+            const diffX = startX - endX;
+            
+            if (Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    moveSlide(1);
+                } else {
+                    moveSlide(-1);
+                }
+            }
+        }, { passive: true });
+    });
+
+    function openModal(index) {
+        const modal = document.getElementById('galleryModal');
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        updateSlidePosition(index);
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('galleryModal');
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    function moveSlide(direction) {
+        let newIdx = currentSlideIdx + direction;
+        if (newIdx < 0) newIdx = 0;
+        if (newIdx >= totalSlides) newIdx = totalSlides - 1;
+        updateSlidePosition(newIdx);
+    }
+
+    function updateSlidePosition(index) {
+        currentSlideIdx = index;
+        const track = document.getElementById('modalTrack');
+        track.style.transform = `translateX(-${currentSlideIdx * 100}%)`;
+        document.getElementById('modalCounter').innerText = `${currentSlideIdx + 1} / ${totalSlides}`;
+    }
+
+    function toggleAccordion(header) {
+        const item = header.parentElement;
+        item.classList.toggle('active');
+    }
+
+    function copyAccount(accountNum) {
+        navigator.clipboard.writeText(accountNum).then(() => {
+            alert('계좌번호가 클립보드에 복사되었습니다.');
+        }).catch(err => {
+            console.error('복사에 실패했습니다.', err);
+        });
+    }
+</script>
+
+</body>
+</html>
