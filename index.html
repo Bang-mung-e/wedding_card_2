@@ -47,7 +47,7 @@
             display: block;
         }
         .section {
-            padding: 60px 20px;
+            padding: 120px 20px;
             text-align: center;
         }
         .section-title {
@@ -64,12 +64,20 @@
         .cover-section {
             position: relative;
             width: 100%;
-            height: 600px;
+            height: 800px;
+            padding-bottom: 10px;
             background-color: #000000;
             text-align: center;
             overflow: hidden;
         }
-
+        .main-info-wrapper {
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            padding: 0 20px;
+        }
         .main-photo-container {
             position: absolute;
             top: 0;
@@ -123,7 +131,7 @@
         .name-overlay {
             position: absolute;
             top: 250px;
-            z-index: 10;
+            z-index: 20;
             color: rgba(255, 255, 255, 0.95);
             font-size: 0.65rem;
             line-height: 1.4;
@@ -152,8 +160,8 @@
         }
 
         .main-info {
-            position: absolute;
-            bottom: -3px;
+            position: flex;
+            bottom: 60px;
             left: 0;
             width: 100%;
             z-index: 10;
@@ -166,45 +174,65 @@
             display: inline-block;
             margin-bottom: 12px;
             color: #ff8fa3;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             letter-spacing: 2px;
             background-color: rgba(0,0,0,0.4);
         }
-        .main-date {
-            font-size: 1.2rem;
-            font-weight: bold;
+
+        .info-group {
+            margin-bottom: -20px;
+        }
+
+        .info-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .main-location {
+            font-size: 0.9rem;
             color: #ffffff;
             letter-spacing: 1px;
         }
-        .main-venue {
-            font-size: 0.95rem;
-            color: #cccccc;
-            margin-top: 6px;
-        }
-        .main-address {
-            font-size: 0.8rem;
-            color: #777777;
+
+        .main-date {
+            font-size: 0.9rem;
+            color: #ffffff;
+            letter-spacing: 1px;
             margin-top: 4px;
         }
+
+        .main-venue {
+            font-size: 0.9rem;
+
+            color: #ffffff;
+            margin-top: 6px;
+        }
+
+        .main-address {
+            font-size: 0.9rem;   
+            color: #d2d1d1;
+            margin-top: 6px;
+        }
+        
 
         /* --- 4. 초대글 섹션 스타일 --- */
         .intro-section {
             background-color: #000000;
             line-height: 1.2;
+            padding-top: 60px; /* <--- 이 부분을 추가/수정해 보세요! */
         }
         .intro-handwritten-sample {
             font-size: 1.1rem;
             color: #e0e0e0;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             word-break: keep-all;
             line-height: 1.8;
         }
         .names {
             font-size: 1rem;
-            margin-top: 30px;
+            margin-top: 60px;
         }
         .names div {
-            margin: 15px 0;
+            margin: 20px 0;
         }
         .names span {
             display: block;
@@ -214,19 +242,21 @@
             margin-bottom: 5px;
         }
 
-        /* --- 5. 어린 시절 (Childhood) 섹션 스타일 --- */
+        /* --- 어린 시절 (Childhood) 섹션 스타일 --- */
         .childhood-section {
-            background-color: #eab4b9; /* 화사하고 따뜻한 인디핑크 배경 */
+            background-color: #eab4b9;
             color: #333333;
-            padding: 50px 90px;
+            padding: 50px 20px;
             display: flex;
             flex-direction: column;
+            align-items: center;
             gap: 50px;
         }
 
         .child-block {
             position: relative;
             width: 100%;
+            max-width: 380px; /* 모바일 화면에 최적화된 최대 너비 */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -237,68 +267,114 @@
             font-size: 1.15rem;
             font-weight: bold;
             color: #111111;
-            margin-bottom: 250px;
+            margin-bottom: 25px;
             letter-spacing: 0.5px;
+        }
+
+        /* --- 1. 어린 시절 사진 가로로 겹쳐 배치하는 영역 --- */
+        .child-photos-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
         }
 
         .child-img-wrapper {
             position: relative;
             width: 100%;
-            max-width: 320px;
-            aspect-ratio: 4 / 5;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            max-width: 250px;
+            transition: transform 0.8s ease;
+        }
+
+        /* 첫 번째 사진 (왼쪽 - 약간 왼쪽으로 기울임) */
+        .child-img-wrapper.photo-left {
+            z-index: 1;
+            margin-right: -10px; /* 음수 마진으로 사진 겹침 연출 */
+            transform: rotate(-4deg);
+        }
+
+        /* 두 번째 사진 (오른쪽 - 살짝 겹치면서 오른쪽으로 기울임) */
+        .child-img-wrapper.photo-right {
+            z-index: 2; /* 오른쪽 사진이 살짝 위에 올라옴 */
+            margin-left: -10px; /* 음수 마진으로 사진 겹침 연출 */
+            transform: rotate(3deg) scale(1.20); /* 살짝 확대 */
         }
 
         .child-photo {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            display: block;
         }
 
         .photo-relation-overlay {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            bottom: 12px;
+            left: 38px;
             z-index: 5;
             color: #ffffff;
             text-align: left;
-            line-height: 1.5;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 0, 0, 0.8);
+            line-height: 1.3;
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+            transform: scale(1.20);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
         }
+
+        .photo-relation-overlay2 {
+            position: absolute;
+            bottom: 20px;
+            left: 90px;
+            z-index: 5;
+            color: #ffffff;
+            text-align: right;
+            line-height: 1.3;
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+        }
+
         .photo-relation-overlay span {
             display: block;
-            font-size: 0.8rem;
-            opacity: 0.9;
+            font-size: 0.7rem;
+            opacity: 0.95;
+        }
+        
+
+        /* --- 2. 편지 이미지 한 열(가로) 배치 영역 --- */
+        .handwriting-container {
+            display: flex;
+            flex-direction: row; /* 같은 열(가로)에 나란히 배치 */
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px; /* 편지 스티커 사이 간격 */
+            width: 100%;
+            margin-top: 25px;
         }
 
         .handwriting-wrapper {
-            position: absolute;
-            z-index: 10;
-            width: 85%;
-            max-width: 280px;
-            pointer-events: none;
+            position: relative;
+            flex: 1; /* 나란히 50%씩 차지 */
+            max-width: 48%;
         }
 
-        .groom-handwriting {
-            top: -40px;
-            right: 150px;
+        /* 아버지/어머니 편지에 살짝의 회전감을 주어 자연스럽게 배치 */
+        .handwriting-wrapper.father-letter {
+            transform: rotate(-1.5deg);
         }
 
-        .bride-handwriting {
-            top: -40px;
-            right: 150px;
+        .handwriting-wrapper.mother-letter {
+            transform: rotate(1.5deg);
         }
 
         .handwriting-img {
             width: 100%;
             height: auto;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.1));
+            display: block;
+            filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.12));
         }
-
         /* --- 6. 콜라주 뷰 형태의 갤러리 섹션 --- */
         .gallery-section {
             background-color: #000000;
@@ -712,25 +788,33 @@
 
 <div id="wedding-card">
 
-    <!-- 1. 메인 커버 섹션 -->
-    <section class="cover-section">
-        <h1 class="main-title-first">YOU'RE INVITED TO</h1>
-        <h1 class="main-title">Our Wedding</h1>
-        
-        <div class="name-overlay groom-name">신랑 <strong>방진수</strong></div>
-        <div class="name-overlay bride-name">신부 <strong>고지원</strong></div>
+            <!-- 1. 메인 커버 섹션 -->
+        <section class="cover-section">
+            <h1 class="main-title-first">YOU'RE INVITED TO</h1>
+            <h1 class="main-title">Our Wedding</h1>
+            
+            <div class="name-overlay groom-name">신랑 <strong>방진수</strong></div>
+            <div class="name-overlay bride-name">신부 <strong>고지원</strong></div>
 
-        <div class="main-photo-container" style="background-image: url('main-photo.JPG');">
-            <div class="gradient-overlay"></div>
-        </div>
+            <div class="main-photo-container" style="background-image: url('main-photo.JPG');">
+                <div class="gradient-overlay"></div>
+            </div>
 
-        <div class="main-info">
-            <div class="date-badge">Save the date</div>
-            <p class="main-date">2026.10.18 Sun 01:30PM</p>
-            <p class="main-venue">WorldCup Convention 2층 임페리얼홀</p>
-            <p class="main-address">서울 마포구 월드컵로 240</p>
-        </div>
-    </section>
+            <!-- 하단 일정 정보 통합 그룹 -->
+            <div class="main-info-wrapper">
+                <div class="date-badge">Save the date</div>
+
+                <!-- 서울 본식 -->
+                <div class="info-group">
+                    <p class="main-location"></p>
+                    <p class="main-date">2026.10.18 일요일 01:30 오후</p>
+                    <p class="main-venue">월드컵 컨벤션 2층 임페리얼홀</p>
+                    <p class="main-address">서울 마포구 월드컵로 240</p>
+                </div>
+
+            
+            </div>
+        </section>
 
     <!-- 2. 초대글 섹션 -->
     <section class="section intro-section">
@@ -758,37 +842,60 @@
         </div>
     </section>
 
-    <!-- 3. 어린 시절(Childhood) 섹션 -->
+    <!-- 어린 시절(Childhood) 섹션 -->
     <section class="section childhood-section">
+
+        <!-- 1. 신랑 측 영역 -->
         <div class="child-block">
-            <h3 class="child-title-modern">Groom's Childhood</h3>
-            <div class="handwriting-wrapper groom-handwriting">
-                <img src="jinsu-handwriting.png" alt="신랑 손글씨 편지" class="handwriting-img">
+            <h3 class="child-title-modern">Our childhood</h3>
+            
+            <!-- 신랑 어린 시절 사진 (사진 2장 가로 겹침 연출 시 사용) -->
+            <div class="child-photos-row">
+                <div class="child-img-wrapper photo-left">
+                    <img src="child-jinsu.png" alt="신랑 어린 시절 1" class="child-photo">
+                    <div class="photo-relation-overlay">
+                        방종관 & 윤순옥의
+                        <span>아들 진수</span>
+                    </div>
+                </div>
+                
+                <div class="child-img-wrapper photo-right">
+                    <img src="child-jiwon.png" alt="신랑 어린 시절 2" class="child-photo">
+                <div class="photo-relation-overlay2">
+                        고영국 & 김순미의<br>
+                        <span>딸 지원</span>
+                    </div>
+                </div>
             </div>
-            <div class="child-img-wrapper">
-                <img src="child-jinsu.jpg" alt="신랑 어린 시절" class="child-photo">
-                <div class="photo-relation-overlay">
-                    방종관 & 윤순옥의
-                    <span>아들 진수</span>
+
+            <!-- 신랑 측 부모님 편지 (같은 열/가로 배치) -->
+            <div class="handwriting-container">
+                <!-- 아버지 편지 -->
+                <div class="handwriting-wrapper father-letter">
+                    <img src="jinsu-father-handwriting.png" alt="신랑 아버지 손글씨 편지" class="handwriting-img">
+                </div>
+                <!-- 어머니 편지 -->
+                <div class="handwriting-wrapper mother-letter">
+                    <img src="jinsu-mother-handwriting.png" alt="신랑 어머니 손글씨 편지" class="handwriting-img">
                 </div>
             </div>
         </div>
 
-        <div class="child-block">
-            <h3 class="child-title-modern">Bride's Childhood</h3>
-            <div class="handwriting-wrapper bride-handwriting">
-                <img src="jiwon-handwriting.png" alt="신부 손글씨 편지" class="handwriting-img">
-            </div>
-            <div class="child-img-wrapper">
-                <img src="child-jiwon.jpg" alt="신부 어린 시절" class="child-photo">
-                <div class="photo-relation-overlay">
-                    고영국 & 김순미의
-                    <span>딸 지원</span>
+
+            <!-- 신부 측 부모님 편지 (같은 열/가로 배치) -->
+            <div class="handwriting-container">
+                <!-- 아버지 편지 -->
+                <div class="handwriting-wrapper father-letter">
+                    <img src="jiwon-father-handwriting.png" alt="신부 아버지 손글씨 편지" class="handwriting-img">
+                </div>
+                <!-- 어머니 편지 -->
+                <div class="handwriting-wrapper mother-letter">
+                    <img src="jiwon-mother-handwriting.png" alt="신부 어머니 손글씨 편지" class="handwriting-img">
                 </div>
             </div>
-        </div>
+    
+
     </section>
-
     <!-- 4. 갤러리 섹션 -->
     <section class="section gallery-section" id="gallerySection">
         <h2 class="section-title">Gallery</h2>
@@ -895,106 +1002,284 @@
         </table>
     </section>
 
-<!-- 6. 오시는 길 (Location) 섹션 -->
+<!-- 오시는 길 (Location) 섹션 -->
 <section class="section location-section">
     <h2 class="section-title">Location</h2>
-    
-    <p style="font-size: 1.05rem; font-weight: bold; color: #ffffff; margin-bottom: 6px;">월드컵컨벤션 2층 임페리얼홀</p>
-    <p style="font-size: 0.85rem; color: #888888;">서울 마포구 월드컵로 240</p>
 
-    <!-- 지도 영역 -->
-    <div id="map" class="map-box" style="width:100%; height:250px; margin:20px 0; border-radius:8px; overflow:hidden; border:1px solid #333333;"></div>
+    <!-- ================= [1] 서울 본식 장소 ================= -->
+    <div class="venue-location-block" style="margin-bottom: 50px;">
+        
+        <!-- 상단 라벨 -->
+        <div style="margin-bottom: 12px;">
+            <span style="display:inline-block; padding: 5px 12px; background: #1a1a1a; color: #ff8fa3; font-size: 0.85rem; border-radius: 6px; font-weight: bold;">
+                서울 본식
+            </span>
+        </div>
 
-        <!-- 네이버 지도 검색 연동 버튼 -->
-    <a href="https://m.map.naver.com/search2/search.naver?query=%EC%9B%94%EB%93%9C%EC%BB%B5%EC%BB%A8%EB%B2%A4%EC%85%98" target="_blank" class="map-btn" style="background-color: #03C75A; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold;">
-        💚 네이버 지도로 빠른 길찾기
-    </a>
+        <!-- 어르신 맞춤 강조 정보 카드 (서울) -->
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 22px 16px; margin-bottom: 16px; text-align: center;">
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin-bottom: 14px; letter-spacing: -0.5px;">
+                서울 본식 안내
+            </h3>
 
-    <div class="transport-info">
-        <div class="transport-title">🚇 지하철 안내</div>
-        <p class="transport-desc">지하철 6호선 월드컵경기장역 1번 출구 도보 5분 거리</p>
+            <!-- 일시 정보 -->
+            <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(255, 255, 255, 0.15);">
+                <div style="font-size: 0.8rem; color: #ff8fa3; font-weight: bold; margin-bottom: 3px;">일시</div>
+                <div style="font-size: 1.15rem; font-weight: 700; color: #ffffff;">
+                    2026년 10월 24일 (토) <!-- ※ 예시 일자입니다. 필요시 변경하세요 -->
+                </div>
+                <div style="font-size: 1.05rem; font-weight: 600; color: #e0e0e0; margin-top: 2px;">
+                    오후 12:00 <!-- ※ 예시 시간입니다. 필요시 변경하세요 -->
+                </div>
+            </div>
 
-        <div class="transport-title">🚗 주차 및 차량 안내</div>
-        <p class="transport-desc" style="margin-bottom:0;">서울월드컵경기장 내 주차장 이용 가능 (하객 주차 등록 시 무료 주차 지원)</p>
+            <!-- 장소 및 주소 -->
+            <div>
+                <div style="font-size: 0.8rem; color: #ff8fa3; font-weight: bold; margin-bottom: 3px;">장소</div>
+                <div style="font-size: 1.2rem; font-weight: 700; color: #ffffff;">
+                    월드컵컨벤션 2층 임페리얼홀
+                </div>
+                <div style="font-size: 0.95rem; color: #aaaaaa; margin-top: 4px; word-break: keep-all;">
+                    서울 마포구 월드컵로 240
+                </div>
+            </div>
+        </div>
+
+        <!-- 서울 지도 -->
+        <div id="map-seoul" class="map-box" style="width:100%; height:220px; margin:15px 0; border-radius:8px; overflow:hidden; border:1px solid #333333;"></div>
+
+        <!-- 네이버 지도 빠른 길찾기 (서울) -->
+        <a href="https://m.map.naver.com/search2/search.naver?query=%EC%9B%94%EB%93%9C%EC%BB%B5%EC%BB%A8%EB%B2%A4%EC%85%98" target="_blank" class="map-btn" style="background-color: #03C75A; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 0.95rem;">
+            💚 네이버 지도로 서울 길찾기
+        </a>
+
+        <!-- 교통 및 주차 안내 -->
+        <div class="transport-info" style="margin-top: 18px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px;">
+            <div class="transport-title" style="font-weight: bold; color: #ffffff; margin-bottom: 4px; font-size: 0.95rem;">🚇 지하철 안내</div>
+            <p class="transport-desc" style="color: #cccccc; font-size: 0.9rem; margin-bottom: 12px; word-break: keep-all;">지하철 6호선 월드컵경기장역 1번 출구 도보 5분 거리</p>
+
+            <div class="transport-title" style="font-weight: bold; color: #ffffff; margin-bottom: 4px; font-size: 0.95rem;">🚗 주차 안내</div>
+            <p class="transport-desc" style="color: #cccccc; font-size: 0.9rem; margin-bottom:0; word-break: keep-all;">서울월드컵경기장 내 주차장 이용 가능 (하객 주차 등록 시 무료 지원)</p>
+        </div>
+    </div>
+
+    <!-- 구분선 -->
+    <hr style="border: 0; border-top: 1px solid #222222; margin: 40px 0;">
+
+    <!-- ================= [2] 제주 피로연 장소 ================= -->
+    <div class="venue-location-block">
+        
+        <!-- 상단 라벨 -->
+        <div style="margin-bottom: 12px;">
+            <span style="display:inline-block; padding: 5px 12px; background: #1a1a1a; color: #ff8fa3; font-size: 0.85rem; border-radius: 6px; font-weight: bold;">
+                제주 피로연
+            </span>
+        </div>
+
+        <!-- 어르신 맞춤 강조 정보 카드 (제주) -->
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 22px 16px; margin-bottom: 16px; text-align: center;">
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin-bottom: 14px; letter-spacing: -0.5px;">
+                제주 피로연 안내
+            </h3>
+
+            <!-- 일시 정보 -->
+            <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(255, 255, 255, 0.15);">
+                <div style="font-size: 0.8rem; color: #ff8fa3; font-weight: bold; margin-bottom: 3px;">일시</div>
+                <div style="font-size: 1.15rem; font-weight: 700; color: #ffffff;">
+                    2026년 10월 10일 (토)
+                </div>
+                <div style="font-size: 1.05rem; font-weight: 600; color: #e0e0e0; margin-top: 2px;">
+                    오전 10:00 ~ 오후 7:00
+                </div>
+            </div>
+
+            <!-- 장소 및 주소 -->
+            <div>
+                <div style="font-size: 0.8rem; color: #ff8fa3; font-weight: bold; margin-bottom: 3px;">장소</div>
+                <div style="font-size: 1.2rem; font-weight: 700; color: #ffffff;">
+                    동성수산
+                </div>
+                <div style="font-size: 0.95rem; color: #aaaaaa; margin-top: 4px; word-break: keep-all;">
+                    제주 서귀포시 대정읍 최남단해안로 46
+                </div>
+            </div>
+        </div>
+
+        <!-- 제주 지도 -->
+        <div id="map-jeju" class="map-box" style="width:100%; height:220px; margin:15px 0; border-radius:8px; overflow:hidden; border:1px solid #333333;"></div>
+
+        <!-- 네이버 지도 빠른 길찾기 (제주) -->
+        <a href="https://m.map.naver.com/search2/search.naver?query=%EB%8F%99%EC%84%B1%EC%88%98%EC%82%B0" target="_blank" class="map-btn" style="background-color: #03C75A; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 0.95rem;">
+            💚 네이버 지도로 제주 길찾기
+        </a>
+
+        <!-- 주차 및 위치 안내 -->
+        <div class="transport-info" style="margin-top: 18px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px;">
+            <div class="transport-title" style="font-weight: bold; color: #ffffff; margin-bottom: 4px; font-size: 0.95rem;">🚗 위치 및 주차 안내</div>
+            <p class="transport-desc" style="color: #cccccc; font-size: 0.9rem; margin-bottom:0; word-break: keep-all;">
+                최남단해안로 해안도로 위치 / 매장 전용 주차장 이용 가능
+            </p>
+        </div>
     </div>
 </section>
 
+<!-- 네이버 지도 SDK -->
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=b379m8apqj"></script>
+
 <script>
-    // 지도 초기화 함수를 먼저 정의합니다.
     function initMap() {
-        var mapContainer = document.getElementById('map');
-        if (!mapContainer) return;
+        // 1. 서울 월드컵컨벤션 지도
+        var seoulContainer = document.getElementById('map-seoul');
+        if (seoulContainer) {
+            var seoulLoc = new naver.maps.LatLng(37.568249, 126.897241);
+            var seoulMap = new naver.maps.Map(seoulContainer, {
+                center: seoulLoc,
+                zoom: 16,
+                zoomControl: true,
+                zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT }
+            });
+            new naver.maps.Marker({
+                position: seoulLoc,
+                map: seoulMap,
+                title: '월드컵컨벤션'
+            });
+        }
 
-        var lat = 37.568249;
-        var lng = 126.897241;
-        var venueLocation = new naver.maps.LatLng(lat, lng);
+        // 2. 제주 동성수산 지도
+        var jejuContainer = document.getElementById('map-jeju');
+        if (jejuContainer) {
+            var jejuLoc = new naver.maps.LatLng(33.2164885059251, 126.252090841693);
+            var jejuMap = new naver.maps.Map(jejuContainer, {
+                center: jejuLoc,
+                zoom: 16,
+                zoomControl: true,
+                zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT }
+            });
+            new naver.maps.Marker({
+                position: jejuLoc,
+                map: jejuMap,
+                title: '동성수산'
+            });
+        }
+    }
 
-        var mapOptions = {
-            center: venueLocation,
-            zoom: 16,
-            zoomControl: true,
-            zoomControlOptions: {
-                position: naver.maps.Position.TOP_RIGHT
-            }
-        };
-
-        var map = new naver.maps.Map(mapContainer, mapOptions);
-
-        var marker = new naver.maps.Marker({
-            position: venueLocation,
-            map: map,
-            title: '월드컵컨벤션'
-        });
+    if (window.naver && window.naver.maps) {
+        initMap();
+    } else {
+        window.onload = initMap;
     }
 </script>
+<!-- 7. 마음 전하실 곳 (Account) 섹션 -->
+<section class="section account-section">
+    <h2 class="section-title">마음 전하실 곳</h2>
+    <p class="account-notice">
+        축하의 마음을 전해주실 분들을 위해<br>계좌 정보를 안내해 드립니다.
+    </p>
 
-<!-- [중요] callback=initMap 을 추가하여 API 로드 완료 후 initMap 실행 -->
-<!-- YOUR_CLIENT_ID 부분을 발급받으신 실제 Client ID로 꼭 교체하세요 -->
-<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=b379m8apqj"></script>
-    <!-- 7. 마음 전하실 곳 (Account) 섹션 -->
-    <section class="section account-section">
-        <h2 class="section-title">Account</h2>
-        <p class="account-notice">
-            축하의 마음을 전해주실 분들을 위해<br>계좌 정보를 안내해 드립니다.
-        </p>
-
-        <div class="accordion-item">
-            <button class="accordion-header" onclick="toggleAccordion(this)">
-                신랑측 계좌번호 보기
-            </button>
-            <div class="accordion-content">
-                <div class="account-box">
-                    <div class="account-row">
-                        <div>
-                            <span style="font-size:0.8rem; color:#888;">신한은행</span><br>
-                            <span class="account-number">110-123-456789</span>
+    <!-- [1] 신랑측 계좌 아코디언 -->
+    <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+            신랑측 계좌번호 보기
+        </button>
+        <div class="accordion-content">
+            <div class="account-box">
+                
+                <!-- 신랑 계좌 -->
+                <div class="account-row">
+                    <div>
+                        <div style="font-weight: normal; color: #eee; font-size: 0.90rem; line-height: 1.8;">
+                            신랑 <span style="font-size: 0.9rem; font-weight: normal; color: #eee; line-height: 1.8;">방진수</span>
                         </div>
-                        <button class="copy-btn" onclick="copyAccount('110123456789')">복사</button>
+                        <span style="font-size:0.7rem; color:#eee; line-height: 1.8;">신한은행</span>
+                        <span class="account-number" style="display:block; font-weight:bold;">110-123-456789</span>
                     </div>
+                    <button class="copy-btn" onclick="copyAccount('110123456789')">복사</button>
                 </div>
+
+                <hr style="border: 0; border-top: 1px dashed #eee; margin: 12px 0;">
+
+                <!-- 신랑 아버지 계좌 -->
+                <div class="account-row">
+                    <div>
+                        <div style="font-weight: normal; color: #eee; font-size: 0.90rem; line-height: 1.8;">
+                            아버지 <span style="font-size: 0.9rem; font-weight: normal; color: #eee; line-height: 1.8;">방종관</span>
+                        </div>
+                        <span style="font-size:0.7rem; color:#eee; line-height: 1.8;">국민은행</span>
+                        <span class="account-number" style="display:block; font-weight:bold;">123-456-789012</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyAccount('123456789012')">복사</button>
+                </div>
+
+                <hr style="border: 0; border-top: 1px dashed #eee; margin: 12px 0;">
+
+                <!-- 신랑 어머니 계좌 -->
+                <div class="account-row">
+                    <div>
+                        <div style="font-weight: normal; color: #eee; font-size: 0.90rem; line-height: 1.8;">
+                            어머니 <span style="font-size: 0.9rem; font-weight: normal; color: #eee; line-height: 1.8;">윤순옥</span>
+                        </div>
+                        <span style="font-size:0.7rem; color:#eee; line-height: 1.8;">농협은행</span>
+                        <span class="account-number" style="display:block; font-weight:bold;">302-1234-5678-01</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyAccount('3021234567801')">복사</button>
+                </div>
+
             </div>
         </div>
+    </div>
 
-        <div class="accordion-item">
-            <button class="accordion-header" onclick="toggleAccordion(this)">
-                신부측 계좌번호 보기
-            </button>
-            <div class="accordion-content">
-                <div class="account-box">
-                    <div class="account-row">
-                        <div>
-                            <span style="font-size:0.8rem; color:#888;">국민은행</span><br>
-                            <span class="account-number">910-987-654321</span>
+    <!-- [2] 신부측 계좌 아코디언 -->
+    <div class="accordion-item" style="margin-top: 12px;">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+            신부측 계좌번호 보기
+        </button>
+        <div class="accordion-content">
+            <div class="account-box">
+                
+                <!-- 신부 계좌 -->
+                <div class="account-row">
+                    <div>
+                        <div style="font-weight: normal; color: #eee; font-size: 0.90rem; line-height: 1.8;">
+                            신부 <span style="font-size: 0.9rem; font-weight: normal; color: #eee; line-height: 1.8;">고지원</span>
                         </div>
-                        <button class="copy-btn" onclick="copyAccount('910987654321')">복사</button>
+                        <span style="font-size:0.7rem; color:#eee; line-height: 1.8;">카카오뱅크</span>
+                        <span class="account-number" style="display:block; font-weight:bold;">3333-01-2345678</span>
                     </div>
+                    <button class="copy-btn" onclick="copyAccount('3333012345678')">복사</button>
                 </div>
+
+                <hr style="border: 0; border-top: 1px dashed #eee; margin: 12px 0;">
+
+                <!-- 신부 아버지 계좌 -->
+                <div class="account-row">
+                    <div>
+                        <div style="font-weight: normal; color: #eee; font-size: 0.90rem; line-height: 1.8;">
+                            아버지 <span style="font-size: 0.9rem; font-weight: normal; color: #eee; line-height: 1.8;">고영국</span>
+                        </div>
+                        <span style="font-size:0.7rem; color:#eee; line-height: 1.8;">기업은행</span>
+                        <span class="account-number" style="display:block; font-weight:bold;">910-987-654321</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyAccount('910987654321')">복사</button>
+                </div>
+
+                <hr style="border: 0; border-top: 1px dashed #eee; margin: 12px 0;">
+
+                <!-- 신부 어머니 계좌 -->
+                <div class="account-row">
+                    <div>
+                        <div style="font-weight: normal; color: #eee; font-size: 0.90rem; line-height: 1.8;">
+                            어머니 <span style="font-size: 0.9rem; font-weight: normal; color: #eee; line-height: 1.8;">김순미</span>
+                        </div>
+                        <span style="font-size:0.7rem; color:#eee; line-height: 1.8;">우리은행</span>
+                        <span class="account-number" style="display:block; font-weight:bold;">1002-987-654321</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyAccount('1002987654321')">복사</button>
+                </div>
+
             </div>
         </div>
-    </section>
-
-</div>
-
+    </div>
+</section>
 <!-- 풀스크린 슬라이더 모달 레이어 -->
 <div id="galleryModal" class="gallery-modal">
     <button class="modal-close-btn" onclick="closeModal()">&times;</button>
