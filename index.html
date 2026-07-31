@@ -11,6 +11,27 @@
     <link href="https://fonts.bunny.net/css?family=abhaya-libre:400|actor:400|aguafina-script:400|alex-brush:400|ballet:400" rel="stylesheet" />
     
     <style>
+        /* =========================================================
+           🔒 [보안 설정] 텍스트 드래그, 이미지 길게 누르기 저장 방지
+           ========================================================= */
+        body {
+            -webkit-user-select: none;  /* Safari, Chrome (텍스트 선택 불가) */
+            -moz-user-select: none;     /* Firefox */
+            -ms-user-select: none;      /* IE/Edge */
+            user-select: none;          /* 표준 */
+            -webkit-touch-callout: none; /* iOS Safari에서 이미지 길게 누를 때 저장 메뉴 차단 */
+        }
+
+        img {
+            -webkit-user-drag: none;    /* 이미지 드래그 방지 */
+            pointer-events: none;       /* 마우스/터치 클릭 저장 방지 */
+        }
+
+        /* 💡 복사 버튼, 아코디언, 지도 버튼 등 클릭이 필수인 요소들 터치 복구 */
+        button, a, input, .copy-btn, .accordion-header, .map-btn, .grid-item, .modal-close-btn, .modal-nav-btn {
+            pointer-events: auto !important;
+        }
+
         /* --- 1. 기본 초기화 및 전체 화면 배경 설정 --- */
         * {
             margin: 0;
