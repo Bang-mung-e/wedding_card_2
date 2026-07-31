@@ -394,31 +394,100 @@
             flex-direction: row; /* 같은 열(가로)에 나란히 배치 */
             justify-content: space-between;
             align-items: flex-start;
-            gap: 10px; /* 편지 스티커 사이 간격 */
+            gap: 1px; /* 편지 스티커 사이 간격 */
             width: 100%;
-            margin-top: 25px;
+            margin-top: 80px;
+            transform: scale(3.0); /* 편지 이미지 살짝 확대 */
         }
 
         .handwriting-wrapper {
             position: relative;
             flex: 1; /* 나란히 50%씩 차지 */
-            max-width: 48%;
+            max-width: 100%;
         }
 
         /* 아버지/어머니 편지에 살짝의 회전감을 주어 자연스럽게 배치 */
-        .handwriting-wrapper.father-letter {
-            transform: rotate(-1.5deg);
+        .handwriting-wrapper.jinsu-father-letter {
+            transform: rotate(-1.5deg) ;
+            margin-left: 113px; /* 왼쪽 편지와 살짝 겹치도록 마진 조정 */
+        }
+        .handwriting-wrapper.jinsu-mother-letter {
+            transform: rotate(-1.5deg) ;
+            margin-left:120px; /* 오른쪽 편지와 살짝 겹치도록 마진 조정 */
         }
 
-        .handwriting-wrapper.mother-letter {
-            transform: rotate(1.5deg);
+        .handwriting-wrapper.jiwon-father-letter {
+            transform: rotate(1.5deg)  ;
+            margin-right: 113px; /* 왼쪽 편지와 살짝 겹치도록 마진 조정 */
         }
+        .handwriting-wrapper.jiwon-mother-letter {
+            transform: rotate(1.5deg)  ;
+            margin-right: 135px; /* 오른쪽 편지와 살짝 겹치도록 마진 조정 */
+        }
+
 
         .handwriting-img {
             width: 100%;
             height: auto;
             display: block;
             filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.12));
+        }
+
+       /* --- 서로에게 쓴 편지 (Love Letter) 섹션 --- */
+        .letter-section {
+            background-color: #000000;
+            padding: 80px 0; /* 💡 좌우 패딩을 0으로 만들어 사진이 꽉 차게 설정 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .letter-block {
+            position: relative;
+            width: 100%; /* 카드 폭 전체 꽉 채우기 */
+            background-color: #000000;
+        }
+
+        /* 배경 커플 사진 영역 */
+        .letter-photo-wrapper {
+            position: relative;
+            width: 100%;
+            /* 세로로 길게 사진 전체를 보여주는 높이 설정 (원하는 경우 주석 해제하여 비율 고정 가능) */
+            /* aspect-ratio: 3 / 4; */
+        }
+
+        .letter-bg-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* 사진 상단 그라데이션 오버레이 (손글씨 흰색/검은색 가독성 확보) */
+        .letter-photo-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 50%);
+            pointer-events: none;
+        }
+
+        /* ✍️ 사진 위 손글씨 편지 이미지 */
+        .handwriting-overlay-img {
+            position: absolute;
+            top: 6%; /* 사진 상단에서 부드럽게 내려오는 위치 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%; /* 편지 이미지 폭 */
+            height: auto;
+            z-index: 5;
+            pointer-events: none;
+            /* 글씨 입체감 선명하게 효과 */
+            filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.3));
         }
         /* --- 6. 콜라주 뷰 형태의 갤러리 섹션 --- */
         .gallery-section {
@@ -894,7 +963,7 @@
 
         <!-- 1. 신랑 측 영역 -->
         <div class="child-block">
-            <h3 class="child-title-modern">Our childhood</h3>
+            <h3 class="child-title-modern">Our Childhood</h3>
             
             <!-- 신랑 어린 시절 사진 (사진 2장 가로 겹침 연출 시 사용) -->
             <div class="child-photos-row">
@@ -918,12 +987,12 @@
             <!-- 신랑 측 부모님 편지 (같은 열/가로 배치) -->
             <div class="handwriting-container">
                 <!-- 아버지 편지 -->
-                <div class="handwriting-wrapper father-letter">
+                <div class="handwriting-wrapper jinsu-father-letter">
                     <img src="jinsu-father-handwriting.png" alt="신랑 아버지 손글씨 편지" class="handwriting-img">
                 </div>
                 <!-- 어머니 편지 -->
-                <div class="handwriting-wrapper mother-letter">
-                    <img src="jinsu-mother-handwriting.png" alt="신랑 어머니 손글씨 편지" class="handwriting-img">
+                <div class="handwriting-wrapper jiwon-father-letter">
+                    <img src="jiwon-father-handwriting.png" alt="신부 어머니 손글씨 편지" class="handwriting-img">
                 </div>
             </div>
         </div>
@@ -932,16 +1001,41 @@
             <!-- 신부 측 부모님 편지 (같은 열/가로 배치) -->
             <div class="handwriting-container">
                 <!-- 아버지 편지 -->
-                <div class="handwriting-wrapper father-letter">
-                    <img src="jiwon-father-handwriting.png" alt="신부 아버지 손글씨 편지" class="handwriting-img">
+                <div class="handwriting-wrapper jinsu-mother-letter">
+                    <img src="jinsu-mother-handwriting.png" alt="신랑 어머니 손글씨 편지" class="handwriting-img">
                 </div>
                 <!-- 어머니 편지 -->
-                <div class="handwriting-wrapper mother-letter">
+                <div class="handwriting-wrapper jiwon-mother-letter">
                     <img src="jiwon-mother-handwriting.png" alt="신부 어머니 손글씨 편지" class="handwriting-img">
                 </div>
             </div>
     
 
+    </section>
+        <!-- 서로에게 쓴 편지 (Love Letter) 섹션 -->
+    <section class="section letter-section">
+
+        <!-- 1. 신랑이 신부에게 쓰는 편지 -->
+        <div class="letter-block">
+            <div class="letter-photo-wrapper">
+                <!-- 배경 커플 사진 -->
+                <img src="couple-photo-01.jpg" alt="커플 사진 1" class="letter-bg-img">
+                
+                <!-- 위로 얹어지는 손글씨 이미지 (투명 PNG) -->
+                <img src="groom-handwriting.png" alt="신랑 손글씨 편지" class="handwriting-overlay-img">
+            </div>
+        </div>
+
+        <!-- 2. 신부가 신랑에게 쓰는 편지 -->
+        <div class="letter-block">
+            <div class="letter-photo-wrapper">
+                <!-- 배경 커플 사진 -->
+                <img src="couple-photo-02.jpg" alt="커플 사진 2" class="letter-bg-img">
+                
+                <!-- 위로 얹어지는 손글씨 이미지 (투명 PNG) -->
+                <img src="bride-handwriting.png" alt="신부 손글씨 편지" class="handwriting-overlay-img">
+            </div>
+        </div>
     </section>
     <!-- 4. 갤러리 섹션 -->
     <section class="section gallery-section" id="gallerySection">
@@ -987,6 +1081,8 @@
             <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide34.JPG" alt="웨딩사진 34"></div>
             <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide35.JPG" alt="웨딩사진 35"></div>
             <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide36.JPG" alt="웨딩사진 36"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide37.JPG" alt="웨딩사진 37"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide38.JPG" alt="웨딩사진 38"></div>
         </div>
         
         <button class="gallery-more-btn" id="moreBtn">사진 더보기 ▼</button>
