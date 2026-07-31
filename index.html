@@ -10,7 +10,31 @@
     <link href="https://fonts.bunny.net/css?family=abhaya-libre:400|aguafina-script:400|alex-brush:400|ballet:400" rel="stylesheet" />
     <link href="https://fonts.bunny.net/css?family=abhaya-libre:400|actor:400|aguafina-script:400|alex-brush:400|ballet:400" rel="stylesheet" />
     
+    
     <style>
+
+                /* 우측 상단 음악 컨트롤 버튼 */
+        .bgm-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+
+        /* 버튼 눌렀을 때 또는 꺼졌을 때 스타일 */
+        .bgm-btn.off {
+            opacity: 0.5;
+            background: rgba(0, 0, 0, 0.3);
+        }
         /* =========================================================
            🔒 [보안 설정] 텍스트 드래그, 이미지 길게 누르기 저장 방지
            ========================================================= */
@@ -807,8 +831,19 @@
 </head>
 <body>
 
+<!-- 배경음악 오디오 태그 (화면에는 안 보임) -->
+<audio id="bgm" loop preload="auto">
+    <!-- 가지고 계신 음악 파일 경로(URL)를 src에 넣어주세요 -->
+    <source src="wedding-bgm.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 우측 상단 고정 음악 재생/정지 버튼 -->
+<button id="bgm-toggle-btn" class="bgm-btn" onclick="toggleBgm()">
+    🎵 ON
+</button>
 
 <div id="wedding-card">
+        
 
             <!-- 1. 메인 커버 섹션 -->
         <section class="cover-section">
@@ -1494,6 +1529,47 @@
             e.preventDefault();
         }
     });
+</script>
+
+<script>
+    var bgm = document.getElementById('bgm');
+    var bgmBtn = document.getElementById('bgm-toggle-btn');
+    var isPlaying = false;
+
+    // 음악 재생/정지 토글 함수
+    function toggleBgm() {
+        if (isPlaying) {
+            bgm.pause();
+            bgmBtn.innerText = '🔇 OFF';
+            bgmBtn.classList.add('off');
+            isPlaying = false;
+        } else {
+            bgm.play();
+            bgmBtn.innerText = '🎵 ON';
+            bgmBtn.classList.remove('off');
+            isPlaying = true;
+        }
+    }
+
+    // 모바일 정책 대응: 사용자가 화면을 처음 '터치/클릭'하는 순간 음악 자동 시작
+    function handleFirstInteraction() {
+        if (!isPlaying) {
+            bgm.play().then(function() {
+                isPlaying = true;
+                bgmBtn.innerText = '🎵 ON';
+                bgmBtn.classList.remove('off');
+            }).catch(function(error) {
+                console.log("자동 재생 정책에 의해 차단됨:", error);
+            });
+        }
+        // 한 번 실행된 후 이벤트 제거
+        document.removeEventListener('click', handleFirstInteraction);
+        document.removeEventListener('touchstart', handleFirstInteraction);
+    }
+
+    // 첫 터치 이벤트 등록
+    document.addEventListener('click', handleFirstInteraction);
+    document.addEventListener('touchstart', handleFirstInteraction);
 </script>
 
 </body>
