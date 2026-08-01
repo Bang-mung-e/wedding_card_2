@@ -287,7 +287,7 @@
             margin-bottom: 5px;
         }
 
-        /* --- 어린 시절 (Childhood) 섹션 스타일 --- */
+            /* --- 어린 시절 (Childhood) 섹션 스타일 --- */
         .childhood-section {
             background-color: #eab4b9;
             color: #333333;
@@ -295,13 +295,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 50px;
+            gap: 0; /* 내부 간격은 개별 margin으로 정밀 조절 */
         }
 
         .child-block {
             position: relative;
             width: 100%;
-            max-width: 380px; /* 모바일 화면에 최적화된 최대 너비 */
+            max-width: 380px; /* 모바일 화면 기준 폭 */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -316,13 +316,13 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- 1. 어린 시절 사진 가로로 겹쳐 배치하는 영역 --- */
+        /* --- 1. 어린 시절 사진 가로 배치 --- */
         .child-photos-row {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .child-img-wrapper {
@@ -332,18 +332,16 @@
             transition: transform 0.8s ease;
         }
 
-        /* 첫 번째 사진 (왼쪽 - 약간 왼쪽으로 기울임) */
         .child-img-wrapper.photo-left {
             z-index: 1;
-            margin-right: -10px; /* 음수 마진으로 사진 겹침 연출 */
+            margin-right: -10px;
             transform: rotate(-4deg);
         }
 
-        /* 두 번째 사진 (오른쪽 - 살짝 겹치면서 오른쪽으로 기울임) */
         .child-img-wrapper.photo-right {
-            z-index: 2; /* 오른쪽 사진이 살짝 위에 올라옴 */
-            margin-left: -10px; /* 음수 마진으로 사진 겹침 연출 */
-            transform: rotate(3deg) scale(1.20); /* 살짝 확대 */
+            z-index: 2;
+            margin-left: -10px;
+            transform: rotate(3deg) scale(1.20);
         }
 
         .child-photo {
@@ -386,61 +384,70 @@
             font-size: 0.7rem;
             opacity: 0.95;
         }
-        
 
-        /* --- 2. 편지 이미지 한 열(가로) 배치 영역 --- */
+        /* --- 2. 편지 이미지 영역 (사진과 분리된 1열 세로 배치) --- */
         .handwriting-container {
             display: flex;
-            flex-direction: row; /* 같은 열(가로)에 나란히 배치 */
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1px; /* 편지 스티커 사이 간격 */
+            flex-direction: column;
+            align-items: center;
             width: 100%;
-            margin-top: 80px;
-            transform: scale(3.0); /* 편지 이미지 살짝 확대 */
+            /* 💡 사진과 첫 번째 편지 사이에 공간을 두어 절대 겹치지 않게 설정 */
+            margin-top: 30px; 
         }
 
         .handwriting-wrapper {
             position: relative;
-            flex: 1; /* 나란히 50%씩 차지 */
-            max-width: 100%;
+            width: 100%; /* 편지가 시원시원하게 큼직하게 나오도록 설정 */
+            box-sizing: border-box;
+            /* 💡 편지 종이 하단 여백 공간을 살짝 겹쳐 밀착감 연출 (필요시 -10px ~ -30px 조절) */
+            margin-bottom: -230px; 
         }
 
-        /* 아버지/어머니 편지에 살짝의 회전감을 주어 자연스럽게 배치 */
+        /* 마지막 편지는 아래 여백 제거 */
+        .handwriting-wrapper:last-child {
+            margin-bottom: -60px;
+        }
+
+        /* --- 각 편지별 정렬 및 살짝의 기울임 연출 --- */
+
+        /* 1. 진수 아버지 */
         .handwriting-wrapper.jinsu-father-letter {
-            transform: rotate(-1.5deg) ;
-            margin-left: 113px; /* 왼쪽 편지와 살짝 겹치도록 마진 조정 */
-        }
-        .handwriting-wrapper.jinsu-mother-letter {
-            transform: rotate(-1.5deg) ;
-            margin-left:120px; /* 오른쪽 편지와 살짝 겹치도록 마진 조정 */
+            transform: rotate(-1.5deg) translateX(-4px);
+            z-index: 1;
         }
 
+        /* 2. 지원 아버지 */
         .handwriting-wrapper.jiwon-father-letter {
-            transform: rotate(1.5deg)  ;
-            margin-right: 113px; /* 왼쪽 편지와 살짝 겹치도록 마진 조정 */
+            transform: rotate(1.5deg) translateX(4px);
+            z-index: 2;
         }
+
+        /* 3. 진수 어머니 */
+        .handwriting-wrapper.jinsu-mother-letter {
+            transform: rotate(1deg) translateX(-3px);
+            z-index: 3;
+        }
+
+        /* 4. 지원 어머니 */
         .handwriting-wrapper.jiwon-mother-letter {
-            transform: rotate(1.5deg)  ;
-            margin-right: 135px; /* 오른쪽 편지와 살짝 겹치도록 마진 조정 */
+            transform: rotate(-1.5deg) translateX(3px);
+            z-index: 4;
         }
 
-
+        /* 이미지 공통 */
         .handwriting-img {
             width: 100%;
             height: auto;
             display: block;
             filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.12));
         }
-
        /* --- 서로에게 쓴 편지 (Love Letter) 섹션 --- */
         .letter-section {
             background-color: #000000;
-            padding: 80px 0; /* 💡 좌우 패딩을 0으로 만들어 사진이 꽉 차게 설정 */
+            padding: 0 0; /* 💡 좌우 패딩을 0으로 만들어 사진이 꽉 차게 설정 */
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 50px;
         }
 
         .letter-block {
@@ -958,17 +965,16 @@
 
     </section>
 
-    <!-- 어린 시절(Childhood) 섹션 -->
+        <!-- 어린 시절(Childhood) 섹션 -->
     <section class="section childhood-section">
 
-        <!-- 1. 신랑 측 영역 -->
         <div class="child-block">
             <h3 class="child-title-modern">Our Childhood</h3>
             
-            <!-- 신랑 어린 시절 사진 (사진 2장 가로 겹침 연출 시 사용) -->
+            <!-- 어린 시절 사진 영역 -->
             <div class="child-photos-row">
                 <div class="child-img-wrapper photo-left">
-                    <img src="child-jinsu.png" alt="신랑 어린 시절 1" class="child-photo">
+                    <img src="child-jinsu.png" alt="신랑 어린 시절" class="child-photo">
                     <div class="photo-relation-overlay">
                         방종관 & 윤순옥의
                         <span>아들 진수</span>
@@ -976,40 +982,35 @@
                 </div>
                 
                 <div class="child-img-wrapper photo-right">
-                    <img src="child-jiwon.png" alt="신랑 어린 시절 2" class="child-photo">
-                <div class="photo-relation-overlay2">
+                    <img src="child-jiwon.png" alt="신부 어린 시절" class="child-photo">
+                    <div class="photo-relation-overlay2">
                         고영국 & 김순미의<br>
                         <span>딸 지원</span>
                     </div>
                 </div>
             </div>
 
-            <!-- 신랑 측 부모님 편지 (같은 열/가로 배치) -->
+            <!-- 부모님 편지 영역 (4개 통합 배치) -->
             <div class="handwriting-container">
-                <!-- 아버지 편지 -->
+                <!-- 1. 진수 아버지 편지 -->
                 <div class="handwriting-wrapper jinsu-father-letter">
                     <img src="jinsu-father-handwriting.png" alt="신랑 아버지 손글씨 편지" class="handwriting-img">
                 </div>
-                <!-- 어머니 편지 -->
+                <!-- 2. 지원 아버지 편지 -->
                 <div class="handwriting-wrapper jiwon-father-letter">
-                    <img src="jiwon-father-handwriting.png" alt="신부 어머니 손글씨 편지" class="handwriting-img">
+                    <img src="jiwon-father-handwriting.png" alt="신부 아버지 손글씨 편지" class="handwriting-img">
                 </div>
-            </div>
-        </div>
-
-
-            <!-- 신부 측 부모님 편지 (같은 열/가로 배치) -->
-            <div class="handwriting-container">
-                <!-- 아버지 편지 -->
+                <!-- 3. 진수 어머니 편지 -->
                 <div class="handwriting-wrapper jinsu-mother-letter">
                     <img src="jinsu-mother-handwriting.png" alt="신랑 어머니 손글씨 편지" class="handwriting-img">
                 </div>
-                <!-- 어머니 편지 -->
+                <!-- 4. 지원 어머니 편지 -->
                 <div class="handwriting-wrapper jiwon-mother-letter">
                     <img src="jiwon-mother-handwriting.png" alt="신부 어머니 손글씨 편지" class="handwriting-img">
                 </div>
             </div>
-    
+
+        </div>
 
     </section>
         <!-- 서로에게 쓴 편지 (Love Letter) 섹션 -->
@@ -1021,8 +1022,6 @@
                 <!-- 배경 커플 사진 -->
                 <img src="couple-photo-01.jpg" alt="커플 사진 1" class="letter-bg-img">
                 
-                <!-- 위로 얹어지는 손글씨 이미지 (투명 PNG) -->
-                <img src="groom-handwriting.png" alt="신랑 손글씨 편지" class="handwriting-overlay-img">
             </div>
         </div>
 
@@ -1032,8 +1031,6 @@
                 <!-- 배경 커플 사진 -->
                 <img src="couple-photo-02.jpg" alt="커플 사진 2" class="letter-bg-img">
                 
-                <!-- 위로 얹어지는 손글씨 이미지 (투명 PNG) -->
-                <img src="bride-handwriting.png" alt="신부 손글씨 편지" class="handwriting-overlay-img">
             </div>
         </div>
     </section>
