@@ -10,13 +10,21 @@
     <link href="https://fonts.bunny.net/css?family=abhaya-libre:400|aguafina-script:400|alex-brush:400|ballet:400" rel="stylesheet" />
     <link href="https://fonts.bunny.net/css?family=abhaya-libre:400|actor:400|aguafina-script:400|alex-brush:400|ballet:400" rel="stylesheet" />
     
+        <!-- ==================== [여기서부터 미리보기 메타 태그] ==================== -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="진수 & 지원의 결혼식에 초대합니다">
+    <meta property="og:description" content="2026년 10월 18일 일요일 오후 13시30분, 월드컵 컨벤션 임페리얼홀">
     
+    <!-- ★ 제일 중요: 이미지 경로 (반드시 https:// 로 시작하는 절대 경로!) -->
+    <meta property="og:image" content="https://Bang-mung-e.github.io/wedding_card_2/og-image.jpg">
+    
+    <!-- 내 청첩장 웹사이트 주소 -->
+    <meta property="og:url" content="https://Bang-mung-e.github.io/wedding_card_2/">
+    <!-- ===================================================================== --> 
     <link rel="shortcut icon" href="https://Bang-mung-e.github.io/wedding_card_2/favicon.png" type="image/png">
     
   
-    <!-- 카카오 JavaScript SDK -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-
+  
     <style>
 
                 /* 우측 상단 음악 컨트롤 버튼 */
@@ -1720,49 +1728,6 @@
     document.addEventListener('touchstart', handleFirstInteraction);
 </script>
     
-<div style="text-align: center; margin: 40px 0;">
-  <button id="kakaotalk-sharing-btn" style="
-    padding: 14px 28px;
-    background-color: #FEE500;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 15px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 약한 그림자 효과로 완성도 UP */
-  ">
-    카카오톡으로 초대장 공유하기
-  </button>
-</div>
-
-    <script>
-    // 카카오 SDK 초기화 (위에서 복사한 JavaScript 키 입력)
-    Kakao.init('2c37634e027cd8c31374ebd6fd5590fa');
-
-    // 카카오톡 공유 버튼 이벤트 연결
-    Kakao.Share.createDefaultButton({
-        container: '#kakaotalk-sharing-btn',
-        objectType: 'feed',
-        content: {
-        title: '방진수, 고지원 결혼합니다.',
-        description: '2026년 10월 18일 일요일 오후 13시30분',
-        imageUrl: 'https://Bang-mung-e.github.io/wedding_card_2/og-image.jpg', // 카드 상단 대표 이미지
-        link: {
-            mobileWebUrl: 'https://Bang-mung-e.github.io/wedding_card_2/',
-            webUrl: 'https://Bang-mung-e.github.io/wedding_card_2/',
-        },
-        },
-        buttons: [
-        {
-            title: '청첩장 보러가기', // 버튼에 들어갈 문구
-            link: {
-            mobileWebUrl: 'https://Bang-mung-e.github.io/wedding_card_2/',
-            webUrl: 'https://Bang-mung-e.github.io/wedding_card_2/',
-            },
-        },
-        ],
-    });
-    </script>
 
 </body>
 </html>
