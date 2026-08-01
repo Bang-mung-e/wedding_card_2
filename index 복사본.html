@@ -205,7 +205,7 @@
         }
 
         .main-info {
-            position: absolute;
+            position: flex;
             bottom: 60px;
             left: 0;
             width: 100%;
@@ -263,18 +263,18 @@
         .intro-section {
             background-color: #000000;
             line-height: 1.2;
-            padding-top: 40px; /* <--- 이 부분을 추가/수정해 보세요! */
+            padding-top: 60px; /* <--- 이 부분을 추가/수정해 보세요! */
         }
         .intro-handwritten-sample {
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             color: #e0e0e0;
-            margin-bottom: -50px;
+            margin-bottom: 20px;
             word-break: keep-all;
             line-height: 1.8;
         }
         .names {
             font-size: 1rem;
-            margin-top: -50px;
+            margin-top: 60px;
         }
         .names div {
             margin: 20px 0;
@@ -284,7 +284,7 @@
             font-size: 0.8rem;
             color: #888888;
             text-transform: uppercase;
-            margin-bottom: -20px;
+            margin-bottom: 5px;
         }
 
             /* --- 어린 시절 (Childhood) 섹션 스타일 --- */
@@ -322,7 +322,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            margin-bottom: -70px;
+            margin-bottom: 0;
         }
 
         .child-img-wrapper {
@@ -385,93 +385,60 @@
             opacity: 0.95;
         }
 
-        /* --- 편지 및 사진 통합 컨테이너 --- */
+        /* --- 2. 편지 이미지 영역 (사진과 분리된 1열 세로 배치) --- */
         .handwriting-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
+            /* 💡 사진과 첫 번째 편지 사이에 공간을 두어 절대 겹치지 않게 설정 */
             margin-top: 30px; 
         }
 
-        /* 공통 겹침 간격 설정 */
-        .handwriting-wrapper,
-        .couple-photo-wrapper {
-            position: relative;
-            box-sizing: border-box;
-            margin-bottom: -140px; /* 💡 요소 간의 겹침 정도 (필요시 -100px ~ -160px 조절) */
-        }
-
-        /* 마지막 요소는 하단 마진 제거 */
-        .couple-photo-wrapper.couple-photo-4 {
-            margin-bottom: 0;
-        }
-
-        /* --- 편지 개별 스타일 및 z-index --- */
         .handwriting-wrapper {
-            width: 100%;
+            position: relative;
+            width: 100%; /* 편지가 시원시원하게 큼직하게 나오도록 설정 */
+            box-sizing: border-box;
+            /* 💡 편지 종이 하단 여백 공간을 살짝 겹쳐 밀착감 연출 (필요시 -10px ~ -30px 조절) */
+            margin-bottom: -230px; 
         }
 
+        /* 마지막 편지는 아래 여백 제거 */
+        .handwriting-wrapper:last-child {
+            margin-bottom: -60px;
+        }
+
+        /* --- 각 편지별 정렬 및 살짝의 기울임 연출 --- */
+
+        /* 1. 진수 아버지 */
         .handwriting-wrapper.jinsu-father-letter {
             transform: rotate(-1.5deg) translateX(-4px);
             z-index: 1;
         }
 
+        /* 2. 지원 아버지 */
         .handwriting-wrapper.jiwon-father-letter {
             transform: rotate(1.5deg) translateX(4px);
+            z-index: 2;
+        }
+
+        /* 3. 진수 어머니 */
+        .handwriting-wrapper.jinsu-mother-letter {
+            transform: rotate(1deg) translateX(-3px);
             z-index: 3;
         }
 
-        .handwriting-wrapper.jinsu-mother-letter {
-            transform: rotate(-1deg) translateX(-3px);
-            z-index: 5;
-        }
-
+        /* 4. 지원 어머니 */
         .handwriting-wrapper.jiwon-mother-letter {
-            transform: rotate(1.5deg) translateX(3px);
-            z-index: 7;
+            transform: rotate(-1.5deg) translateX(3px);
+            z-index: 4;
         }
 
-        /* --- 커플 사진 개별 스타일 (편지보다 살짝 작은 크기 + 테두리) --- */
-        .couple-photo-wrapper {
-            width: 72%; /* 편지 카드 위에 살짝 얹히는 적당한 폭 */
-            margin-bottom: -190px; /* 💡 편지와 겹치는 정도 */
-        }
-
-        .couple-photo-wrapper.couple-photo-1 {
-            transform: rotate(3deg) translateX(200px) translateY(-80px);
-            z-index: 2; /* 진수부 편지 위, 지원부 편지 아래 */
-        }
-
-        .couple-photo-wrapper.couple-photo-2 {
-            transform: rotate(-4deg) translateX(-30px) translateY(-110px);
-            z-index: 4; /* 지원부 편지 위, 진수모 편지 아래 */
-        }
-
-        .couple-photo-wrapper.couple-photo-3 {
-            transform: rotate(3.5deg) translateX(-30px) translateY(-80px);
-            z-index: 6; /* 진수모 편지 위, 지원모 편지 아래 */
-        }
-
-        .couple-photo-wrapper.couple-photo-4 {
-            transform: rotate(-2.5deg) translateX(270px) translateY(-130px);
-            z-index: 8; /* 지원모 편지 맨 위 */
-        }
-
-        /* 이미지 공통 설정 */
+        /* 이미지 공통 */
         .handwriting-img {
             width: 100%;
             height: auto;
             display: block;
-        }
-
-        .couple-img {
-            width: 30%;
-            height: auto;
-            display: block;
-        }
-
-        .handwriting-img {
             filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.12));
         }
        /* --- 서로에게 쓴 편지 (Love Letter) 섹션 --- */
@@ -801,7 +768,7 @@
             width: 100%;
             height: 220px;
             background-color: #1a1a1a;
-            margin: 1px 0;
+            margin: 20px 0;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid #333333;
@@ -998,13 +965,13 @@
 
     </section>
 
-    <!-- 어린 시절(Childhood) 섹션 -->
+        <!-- 어린 시절(Childhood) 섹션 -->
     <section class="section childhood-section">
 
         <div class="child-block">
             <h3 class="child-title-modern">Our Childhood</h3>
             
-            <!-- 상단 어린 시절 사진 영역 -->
+            <!-- 어린 시절 사진 영역 -->
             <div class="child-photos-row">
                 <div class="child-img-wrapper photo-left">
                     <img src="child-jinsu.png" alt="신랑 어린 시절" class="child-photo">
@@ -1023,41 +990,24 @@
                 </div>
             </div>
 
-            <!-- 부모님 편지 & 사진 교차 배치 영역 -->
+            <!-- 부모님 편지 영역 (4개 통합 배치) -->
             <div class="handwriting-container">
-                
-                <!-- 1. 진수 아버지 편지 + 사진 1 -->
+                <!-- 1. 진수 아버지 편지 -->
                 <div class="handwriting-wrapper jinsu-father-letter">
-                    <img src="jinsu-father-handwriting.png" alt="신랑 아버지 편지" class="handwriting-img">
+                    <img src="jinsu-father-handwriting.png" alt="신랑 아버지 손글씨 편지" class="handwriting-img">
                 </div>
-                <div class="couple-photo-wrapper couple-photo-1">
-                    <img src="couple-photo-1.png" alt="우리 사진 1" class="couple-img">
-                </div>
-
-                <!-- 2. 지원 아버지 편지 + 사진 2 -->
+                <!-- 2. 지원 아버지 편지 -->
                 <div class="handwriting-wrapper jiwon-father-letter">
-                    <img src="jiwon-father-handwriting.png" alt="신부 아버지 편지" class="handwriting-img">
+                    <img src="jiwon-father-handwriting.png" alt="신부 아버지 손글씨 편지" class="handwriting-img">
                 </div>
-                <div class="couple-photo-wrapper couple-photo-2">
-                    <img src="couple-photo-2.png" alt="우리 사진 2" class="couple-img">
-                </div>
-
-                <!-- 3. 진수 어머니 편지 + 사진 3 -->
+                <!-- 3. 진수 어머니 편지 -->
                 <div class="handwriting-wrapper jinsu-mother-letter">
-                    <img src="jinsu-mother-handwriting.png" alt="신랑 어머니 편지" class="handwriting-img">
+                    <img src="jinsu-mother-handwriting.png" alt="신랑 어머니 손글씨 편지" class="handwriting-img">
                 </div>
-                <div class="couple-photo-wrapper couple-photo-3">
-                    <img src="couple-photo-3.png" alt="우리 사진 3" class="couple-img">
-                </div>
-
-                <!-- 4. 지원 어머니 편지 + 사진 4 -->
+                <!-- 4. 지원 어머니 편지 -->
                 <div class="handwriting-wrapper jiwon-mother-letter">
-                    <img src="jiwon-mother-handwriting.png" alt="신부 어머니 편지" class="handwriting-img">
+                    <img src="jiwon-mother-handwriting.png" alt="신부 어머니 손글씨 편지" class="handwriting-img">
                 </div>
-                <div class="couple-photo-wrapper couple-photo-4">
-                    <img src="couple-photo-4.png" alt="우리 사진 4" class="couple-img">
-                </div>
-
             </div>
 
         </div>
@@ -1115,22 +1065,21 @@
             <div class="grid-item is-hidden" onclick="openModal(19)"><img src="slide20.JPG" alt="웨딩사진 20"></div>
             <div class="grid-item is-hidden" onclick="openModal(20)"><img src="slide21.JPG" alt="웨딩사진 21"></div>
             <div class="grid-item is-hidden" onclick="openModal(21)"><img src="slide22.JPG" alt="웨딩사진 22"></div>
-            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide23.JPG" alt="웨딩사진 23"></div>
-            <div class="grid-item is-hidden" onclick="openModal(23)"><img src="slide24.JPG" alt="웨딩사진 24"></div>
-            <div class="grid-item is-hidden" onclick="openModal(24)"><img src="slide25.JPG" alt="웨딩사진 25"></div>
-            <div class="grid-item is-hidden" onclick="openModal(25)"><img src="slide26.JPG" alt="웨딩사진 26"></div>
-            <div class="grid-item is-hidden" onclick="openModal(26)"><img src="slide27.JPG" alt="웨딩사진 27"></div>
-            <div class="grid-item is-hidden" onclick="openModal(27)"><img src="slide28.JPG" alt="웨딩사진 28"></div>
-            <div class="grid-item is-hidden" onclick="openModal(28)"><img src="slide29.JPG" alt="웨딩사진 29"></div>
-            <div class="grid-item is-hidden" onclick="openModal(29)"><img src="slide30.JPG" alt="웨딩사진 30"></div>
-            <div class="grid-item is-hidden" onclick="openModal(30)"><img src="slide31.JPG" alt="웨딩사진 31"></div>
-            <div class="grid-item is-hidden" onclick="openModal(31)"><img src="slide32.JPG" alt="웨딩사진 32"></div>
-            <div class="grid-item is-hidden" onclick="openModal(32)"><img src="slide33.JPG" alt="웨딩사진 33"></div>
-            <div class="grid-item is-hidden" onclick="openModal(33)"><img src="slide34.JPG" alt="웨딩사진 34"></div>
-            <div class="grid-item is-hidden" onclick="openModal(34)"><img src="slide35.JPG" alt="웨딩사진 35"></div>
-            <div class="grid-item is-hidden" onclick="openModal(35)"><img src="slide36.JPG" alt="웨딩사진 36"></div>
-            <div class="grid-item is-hidden" onclick="openModal(36)"><img src="slide37.JPG" alt="웨딩사진 37"></div>
-            <div class="grid-item is-hidden" onclick="openModal(37)"><img src="slide38.JPG" alt="웨딩사진 38"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide24.JPG" alt="웨딩사진 24"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide25.JPG" alt="웨딩사진 25"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide26.JPG" alt="웨딩사진 26"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide27.JPG" alt="웨딩사진 27"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide28.JPG" alt="웨딩사진 28"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide29.JPG" alt="웨딩사진 29"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide30.JPG" alt="웨딩사진 30"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide31.JPG" alt="웨딩사진 31"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide32.JPG" alt="웨딩사진 32"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide33.JPG" alt="웨딩사진 33"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide34.JPG" alt="웨딩사진 34"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide35.JPG" alt="웨딩사진 35"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide36.JPG" alt="웨딩사진 36"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide37.JPG" alt="웨딩사진 37"></div>
+            <div class="grid-item is-hidden" onclick="openModal(22)"><img src="slide38.JPG" alt="웨딩사진 38"></div>
         </div>
         
         <button class="gallery-more-btn" id="moreBtn">사진 더보기 ▼</button>
@@ -1213,35 +1162,37 @@
     <div class="venue-location-block" style="margin-bottom: 50px;">
         
         <!-- 상단 라벨 -->
-        <div style="margin-bottom: 20px;">
-            <span style="display:inline-block; padding: 5px 12px; background: #1a1a1a; color: #eee; font-size: 0.85rem; border-radius: 6px; font-weight: bold;">
-                Seoul
+        <div style="margin-bottom: 12px;">
+            <span style="display:inline-block; padding: 5px 12px; background: #1a1a1a; color: #ff8fa3; font-size: 0.85rem; border-radius: 6px; font-weight: bold;">
+                서울 본식
             </span>
         </div>
 
         <!-- 어르신 맞춤 강조 정보 카드 (서울) -->
-        <div style="margin-bottom: 30px; text-align: center;">
-           
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 22px 16px; margin-bottom: 16px; text-align: center;">
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin-bottom: 14px; letter-spacing: -0.5px;">
+                서울 본식 안내
+            </h3>
 
             <!-- 일시 정보 -->
-            <div style="margin-bottom: 12px; padding-bottom: 12px;"">
-                <div style="font-size: 0.95rem; color: #ff8fa3; font-weight: bold; margin-bottom: 3px;">일시</div>
-                <div style="font-size: 0.95rem; font-weight: 700; color: #ffffff;">
+            <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(255, 255, 255, 0.15);">
+                <div style="font-size: 0.8rem; color: #ff8fa3; font-weight: bold; margin-bottom: 3px;">일시</div>
+                <div style="font-size: 1.15rem; font-weight: 700; color: #ffffff;">
                     2026년 10월 18일 (일) <!-- ※ 예시 일자입니다. 필요시 변경하세요 -->
                 </div>
-                <div style="font-size: 1.05rem; font-weight: 600; color: #aaaaaa; margin-top: 2px;">
+                <div style="font-size: 1.05rem; font-weight: 600; color: #e0e0e0; margin-top: 2px;">
                     오후 13:30 <!-- ※ 예시 시간입니다. 필요시 변경하세요 -->
                 </div>
             </div>
 
             <!-- 장소 및 주소 -->
             <div>
-                <div style="font-size: 0.95rem; color: #ff8fa3; font-weight: bold; margin-bottom: 3px;">장소</div>
-                <div style="font-size: 0.95rem; font-weight: 700; color: #ffffff;">
+                <div style="font-size: 0.8rem; color: #ff8fa3; font-weight: bold; margin-bottom: 3px;">장소</div>
+                <div style="font-size: 1.2rem; font-weight: 700; color: #ffffff;">
                     월드컵컨벤션 2층 임페리얼홀
                 </div>
-                <div style="font-size: 0.95rem; color: #aaaaaa; margin-top: 4px; margin-bottom: 12px; word-break: keep-all;">
-                    서울 마포구 월드컵로 240<br>
+                <div style="font-size: 0.95rem; color: #aaaaaa; margin-top: 4px; word-break: keep-all;">
+                    서울 마포구 월드컵로 240
                 </div>
             </div>
         </div>
@@ -1250,16 +1201,16 @@
         <div id="map-seoul" class="map-box" style="width:100%; height:220px; margin:15px 0; border-radius:8px; overflow:hidden; border:1px solid #333333;"></div>
 
         <!-- 네이버 지도 빠른 길찾기 (서울) -->
-        <a href="https://m.map.naver.com/search2/search.naver?query=%EC%9B%94%EB%93%9C%EC%BB%B5%EC%BB%A8%EB%B2%A4%EC%85%98" target="_blank" class="map-btn" style="background-color: #eab4b9; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 0.95rem;">
+        <a href="https://m.map.naver.com/search2/search.naver?query=%EC%9B%94%EB%93%9C%EC%BB%B5%EC%BB%A8%EB%B2%A4%EC%85%98" target="_blank" class="map-btn" style="background-color: #03C75A; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 0.95rem;">
             네이버 지도로 서울 길찾기
         </a>
 
         <!-- 교통 및 주차 안내 -->
         <div class="transport-info" style="margin-top: 18px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px;">
-            <div class="transport-title" style="font-weight: bold; color: #ffffff; margin-bottom: 4px; font-size: 0.95rem;">지하철 안내</div>
+            <div class="transport-title" style="font-weight: bold; color: #ffffff; margin-bottom: 4px; font-size: 0.95rem;">🚇 지하철 안내</div>
             <p class="transport-desc" style="color: #cccccc; font-size: 0.9rem; margin-bottom: 12px; word-break: keep-all;">지하철 6호선 월드컵경기장역 2번 출구 도보 5분 거리</p>
 
-            <div class="transport-title" style="font-weight: bold; color: #ffffff; margin-bottom: 4px; font-size: 0.95rem;">주차 안내</div>
+            <div class="transport-title" style="font-weight: bold; color: #ffffff; margin-bottom: 4px; font-size: 0.95rem;">🚗 주차 안내</div>
             <p class="transport-desc" style="color: #cccccc; font-size: 0.9rem; margin-bottom:0; word-break: keep-all;">서울월드컵경기장 내 주차장 이용 가능 (하객 주차 등록 지원)</p>
         </div>
     </div>
@@ -1271,23 +1222,25 @@
     <div class="venue-location-block">
         
         <!-- 상단 라벨 -->
-        <div style="margin-bottom: 20px;">
-            <span style="display:inline-block; padding: 5px 12px; background: #1a1a1a; color: #eee; font-size: 0.85rem; border-radius: 6px; font-weight: bold;">
-                Jeju
+        <div style="margin-bottom: 12px;">
+            <span style="display:inline-block; padding: 5px 12px; background: #1a1a1a; color: #ff8fa3; font-size: 0.85rem; border-radius: 6px; font-weight: bold;">
+                제주 피로연
             </span>
         </div>
 
         <!-- 어르신 맞춤 강조 정보 카드 (제주) -->
-        <div style="margin-bottom: 30px; text-align: center;">
-           
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 22px 16px; margin-bottom: 16px; text-align: center;">
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin-bottom: 14px; letter-spacing: -0.5px;">
+                제주 피로연 안내
+            </h3>
 
             <!-- 일시 정보 -->
-            <div style="margin-bottom: 12px; padding-bottom: 12px; ">
+            <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(255, 255, 255, 0.15);">
                 <div style="font-size: 0.8rem; color: #ff8fa3; font-weight: bold; margin-bottom: 3px;">일시</div>
-                <div style="font-size: 0.95rem; font-weight: 700; color: #ffffff;">
+                <div style="font-size: 1.15rem; font-weight: 700; color: #ffffff;">
                     2026년 10월 10일 (토)
                 </div>
-                <div style="font-size: 0.95rem; font-weight: 600; color: #aaaaaa; margin-top: 2px;">
+                <div style="font-size: 1.05rem; font-weight: 600; color: #e0e0e0; margin-top: 2px;">
                     오전 10:00 ~ 오후 7:00
                 </div>
             </div>
@@ -1295,7 +1248,7 @@
             <!-- 장소 및 주소 -->
             <div>
                 <div style="font-size: 0.8rem; color: #ff8fa3; font-weight: bold; margin-bottom: 3px;">장소</div>
-                <div style="font-size: 0.95rem; font-weight: 700; color: #ffffff;">
+                <div style="font-size: 1.2rem; font-weight: 700; color: #ffffff;">
                     동성수산
                 </div>
                 <div style="font-size: 0.95rem; color: #aaaaaa; margin-top: 4px; word-break: keep-all;">
@@ -1308,13 +1261,13 @@
         <div id="map-jeju" class="map-box" style="width:100%; height:220px; margin:15px 0; border-radius:8px; overflow:hidden; border:1px solid #333333;"></div>
 
         <!-- 네이버 지도 빠른 길찾기 (제주) -->
-        <a href="https://m.map.naver.com/search2/search.naver?query=%EB%8F%99%EC%84%B1%EC%88%98%EC%82%B0" target="_blank" class="map-btn" style="background-color: #eab4b9; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 0.95rem;">
+        <a href="https://m.map.naver.com/search2/search.naver?query=%EB%8F%99%EC%84%B1%EC%88%98%EC%82%B0" target="_blank" class="map-btn" style="background-color: #03C75A; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 0.95rem;">
             네이버 지도로 제주 길찾기
         </a>
 
         <!-- 주차 및 위치 안내 -->
         <div class="transport-info" style="margin-top: 18px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px;">
-            <div class="transport-title" style="font-weight: bold; color: #ffffff; margin-bottom: 4px; font-size: 0.95rem;">위치 및 주차 안내</div>
+            <div class="transport-title" style="font-weight: bold; color: #ffffff; margin-bottom: 4px; font-size: 0.95rem;">🚗 위치 및 주차 안내</div>
             <p class="transport-desc" style="color: #cccccc; font-size: 0.9rem; margin-bottom:0; word-break: keep-all;">
                 최남단해안로 해안도로 위치 / 매장 전용 주차장 이용 가능
             </p>
