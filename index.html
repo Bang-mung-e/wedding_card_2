@@ -316,7 +316,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- 1. 어린 시절 사진 가로 배치 --- */
+            /* --- 어린 시절 사진 가로 배치 영역 --- */
         .child-photos-row {
             display: flex;
             justify-content: center;
@@ -327,154 +327,103 @@
 
         .child-img-wrapper {
             position: relative;
-            width: 100%;
-            max-width: 250px;
+            width: 50%; /* 💡 max-width 대신 비율(%)로 설정해 부모 크기에 맞춰 함께 줄어들고 늘어남 */
+            max-width: 200px;
             transition: transform 0.8s ease;
         }
 
         .child-img-wrapper.photo-left {
             z-index: 1;
-            margin-right: -10px;
+            margin-right: -2.5%; /* % 단위 마진 */
             transform: rotate(-4deg);
         }
 
         .child-img-wrapper.photo-right {
             z-index: 2;
-            margin-left: -10px;
-            transform: rotate(3deg) scale(1.20);
+            margin-left: -2.5%;
+            transform: rotate(3deg) scale(1.2); /* scale(1.2) 제거 후 사진 자체 래퍼 너비나 폰트 크기로 정돈 */
         }
 
-        .child-photo {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
+        /* --- 💡 반응형 오버레이 텍스트 (px -> % 변경) --- */
         .photo-relation-overlay {
             position: absolute;
-            bottom: 12px;
-            left: 38px;
+            bottom: 8%;/* 💡 % 단위로 하단 위치 지정 */
             z-index: 5;
             color: #ffffff;
-            text-align: left;
             line-height: 1.3;
-            font-size: 0.75rem;
+            font-size: 0.8rem; /* scale 대신 font-size 조절 */
             letter-spacing: 0.3px;
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-            transform: scale(1.20);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+            white-space: nowrap; /* 글자가 의도치 않게 줄바꿈되는 현상 방지 */
         }
 
         .photo-relation-overlay2 {
             position: absolute;
-            bottom: 20px;
-            left: 80px;
+            bottom: 8%;  /* 💡 % 단위로 하단 위치 지정 */
             z-index: 5;
             color: #ffffff;
-            text-align: right;
             line-height: 1.3;
-            font-size: 0.75rem;
+            font-size: 0.7rem; /* scale 대신 font-size 조절 */
             letter-spacing: 0.3px;
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+            white-space: nowrap; /* 글자가 의도치 않게 줄바꿈되는 현상 방지 */
+        }
+
+        /* 신랑측 (좌측 사진 오버레이) */
+        .photo-relation-overlay {
+            left: 12%; /* 💡 px 대신 %로 좌측 위치 지정 */
+            text-align: left;
+        }
+
+        /* 신부측 (우측 사진 오버레이) */
+        .photo-relation-overlay2 {
+            right: 12%; /* 💡 left 대신 right %를 주면 우측 끝 기준으로 항상 일정하게 유지됨 */
+            text-align: right;
         }
 
         .photo-relation-overlay span {
             display: block;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
+            opacity: 0.95;
+        }
+        .photo-relation-overlay2 span {
+            display: block;
+            font-size: 0.68rem;
             opacity: 0.95;
         }
 
-        /* --- 편지 및 사진 통합 컨테이너 --- */
+            /* --- 편지 및 사진 통합 컨테이너 --- */
         .handwriting-container {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
-            padding: 0 20px;
-            margin-top: 30px; 
+            width: 115%; /* 💡 120% 대신 100%로 안전하게 맞춤 */
+            box-sizing: border-box;
+            margin-top: 30px;
         }
 
-        /* 공통 겹침 간격 설정 */
+        /* 요소 공통 크기 및 겹침 */
         .handwriting-wrapper {
             position: relative;
+            width: 100%;
             box-sizing: border-box;
-            margin-bottom: -100px; /* 💡 요소 간의 겹침 정도 (필요시 -100px ~ -160px 조절) */
+            margin-bottom: -50%; /* 💡 px 대신 %를 쓰면 화면 크기가 달라져도 비율 유지! */
         }
-
 
         .couple-photo-wrapper {
             position: relative;
+            width: 20%; /* 사진 크기를 상위 요소 기준 비율로 고정 */
             box-sizing: border-box;
-            margin-bottom: -140px; /* 💡 요소 간의 겹침 정도 (필요시 -100px ~ -160px 조절) */
-        }
-
-        /* 마지막 요소는 하단 마진 제거 */
-        .couple-photo-wrapper.couple-photo-4 {
-            margin-bottom: 0;
-        }
-
-        /* --- 편지 개별 스타일 및 z-index --- */
-        .handwriting-wrapper {
-            width: 100%;
-        }
-
-        .handwriting-wrapper.jinsu-father-letter {
-            transform: rotate(-1.5deg) translateX(-4px);
-            z-index: 1;
-        }
-
-        .handwriting-wrapper.jiwon-father-letter {
-            transform: rotate(1.5deg) translateX(4px);
-            z-index: 3;
-        }
-
-        .handwriting-wrapper.jinsu-mother-letter {
-            transform: rotate(-1deg) translateX(-3px);
-            z-index: 5;
-        }
-
-        .handwriting-wrapper.jiwon-mother-letter {
-            transform: rotate(1.5deg) translateX(-20px) translateY(40px);
-            
-            z-index: 7;
-        }
-
-        /* --- 커플 사진 개별 스타일 (편지보다 살짝 작은 크기 + 테두리) --- */
-        .couple-photo-wrapper {
-            width: 72%; /* 편지 카드 위에 살짝 얹히는 적당한 폭 */
-            margin-bottom: -190px; /* 💡 편지와 겹치는 정도 */
-        }
-
-        .couple-photo-wrapper.couple-photo-1 {
-            transform: rotate(3deg) translateX(200px) translateY(-80px);
-            z-index: 2; /* 진수부 편지 위, 지원부 편지 아래 */
-        }
-
-        .couple-photo-wrapper.couple-photo-2 {
-            transform: rotate(-4deg) translateX(-30px) translateY(-110px);
-            z-index: 4; /* 지원부 편지 위, 진수모 편지 아래 */
-        }
-
-        .couple-photo-wrapper.couple-photo-3 {
-            transform: rotate(3.5deg) translateX(-30px) translateY(-80px);
-            z-index: 6; /* 진수모 편지 위, 지원모 편지 아래 */
-        }
-
-        .couple-photo-wrapper.couple-photo-4 {
-            transform: rotate(-2.5deg) translateX(220px) translateY(-100px);
-            z-index: 8; /* 지원모 편지 맨 위 */
+            margin-bottom: -35%; /* 💡 상하 겹침도 %로 지정 */
         }
 
         /* 이미지 공통 설정 */
-        .handwriting-img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
+        .handwriting-img,
         .couple-img {
-            width: 30%;
+            width: 100%;
             height: auto;
             display: block;
         }
@@ -482,10 +431,54 @@
         .handwriting-img {
             filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.12));
         }
+
+        /* --- 편지 개별 스타일 (rotate만 가볍게 유지) --- */
+        .handwriting-wrapper.jinsu-father-letter {
+            transform: rotate(-1.5deg);
+            z-index: 1;
+        }
+
+        .handwriting-wrapper.jiwon-father-letter {
+            transform: rotate(1.5deg);
+            z-index: 3;
+        }
+
+        .handwriting-wrapper.jinsu-mother-letter {
+            transform: rotate(-1deg);
+            z-index: 5;
+        }
+
+        .handwriting-wrapper.jiwon-mother-letter {
+            transform: rotate(1.5deg) translateY(15%);
+            z-index: 7;
+        }
+
+        /* --- 💡 반응형 커플 사진 위치 (px -> %로 변경) --- */
+        .couple-photo-wrapper.couple-photo-1 {
+            /* translateX를 %로 변경하여 넓은 폰/좁은 폰 모두 같은 위치 비율 유지 */
+            transform: rotate(3deg) translateX(140%) translateY(-20%);
+            z-index: 2;
+        }
+
+        .couple-photo-wrapper.couple-photo-2 {
+            transform: rotate(-4deg) translateX(-160%) translateY(-20%);
+            z-index: 4;
+        }
+
+        .couple-photo-wrapper.couple-photo-3 {
+            transform: rotate(3.5deg) translateX(-160%) translateY(-10%) scale(1.20);
+            z-index: 6;
+        }
+
+        .couple-photo-wrapper.couple-photo-4 {
+            transform: rotate(-2.5deg) translateX(160%) translateY(-150%) scale(1.10);
+            z-index: 8;
+            margin-bottom: 0;
+        }
        /* --- 서로에게 쓴 편지 (Love Letter) 섹션 --- */
         .letter-section {
             background-color: #000000;
-            padding: 0 0; /* 💡 좌우 패딩을 0으로 만들어 사진이 꽉 차게 설정 */
+            padding: 5% 5%; /* 💡 좌우 패딩을 0으로 만들어 사진이 꽉 차게 설정 */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -500,7 +493,8 @@
         /* 배경 커플 사진 영역 */
         .letter-photo-wrapper {
             position: relative;
-            width: 100%;
+            width:100%;
+            height: 100;
             /* 세로로 길게 사진 전체를 보여주는 높이 설정 (원하는 경우 주석 해제하여 비율 고정 가능) */
             /* aspect-ratio: 3 / 4; */
         }
@@ -617,12 +611,12 @@
         /* --- 7. 달력 (Calendar) 섹션 스타일 --- */
         .calendar-section {
             background-color: #000000;
-            padding: 60px 20px;
+            padding: 60px 10px;
             border-top: 1px solid #1a1a1a;
         }
 
         .calendar-header {
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
 
         .calendar-header-date {
@@ -976,7 +970,7 @@
 
             <!-- 하단 일정 정보 통합 그룹 -->
             <div class="main-info-wrapper">
-                <div class="date-badge">Save the date</div>
+                <div class="date-badge" style="margin-bottom: 7%;">Save the date</div>
 
                 <!-- 서울 본식 -->
                 <div class="info-group">
@@ -1079,7 +1073,7 @@
             <div class="letter-photo-wrapper">
                 <!-- 배경 커플 사진 -->
                 <img src="couple-photo-01.jpg" alt="커플 사진 1" class="letter-bg-img">
-                
+
             </div>
         </div>
 
@@ -1094,7 +1088,7 @@
     </section>
     <!-- 4. 갤러리 섹션 -->
     <section class="section gallery-section" id="gallerySection">
-        <h2 class="section-title">Gallery</h2>
+        <h2 class="section-title" style="margin-top: -6%;">Gallery</h2>
         
         <div class="gallery-grid" id="galleryGrid">
             <div class="grid-item wide2" onclick="openModal(0)"><img src="slide1.JPG" alt="웨딩사진 1"></div>
@@ -1214,11 +1208,11 @@
     </section>
 
 <!-- 오시는 길 (Location) 섹션 -->
-<section class="section location-section">
-    <h2 class="section-title">Location</h2>
+<section class="section location-section" style="margin-bottom: -15%;">
+    <h2 class="section-title" style="margin-top: -20%;">Location</h2>
 
     <!-- ================= [1] 서울 본식 장소 ================= -->
-    <div class="venue-location-block" style="margin-bottom: 50px;">
+    <div class="venue-location-block" style="margin-bottom: 30px;">
         
         <!-- 상단 라벨 -->
         <div style="margin-bottom: 20px;">
@@ -1248,14 +1242,14 @@
                 <div style="font-size: 0.95rem; font-weight: 700; color: #ffffff;">
                     월드컵컨벤션 2층 임페리얼홀
                 </div>
-                <div style="font-size: 0.95rem; color: #aaaaaa; margin-top: 4px; margin-bottom: 12px; word-break: keep-all;">
+                <div style="font-size: 0.95rem; color: #aaaaaa; margin-top: 4px; margin-bottom: 20px; word-break: keep-all;">
                     서울 마포구 월드컵로 240<br>
                 </div>
             </div>
         </div>
 
         <!-- 서울 지도 -->
-        <div id="map-seoul" class="map-box" style="width:100%; height:220px; margin:15px 0; border-radius:8px; overflow:hidden; border:1px solid #333333;"></div>
+        <div id="map-seoul" class="map-box" style="width:100%; height:220px; margin:20px 0; margin-top: 10%; border-radius:8px; overflow:hidden; border:1px solid #333333;"></div>
 
         <!-- 네이버 지도 빠른 길찾기 (서울) -->
         <a href="https://m.map.naver.com/search2/search.naver?query=%EC%9B%94%EB%93%9C%EC%BB%B5%EC%BB%A8%EB%B2%A4%EC%85%98" target="_blank" class="map-btn" style="background-color: #eab4b9; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 0.95rem;">
@@ -1313,7 +1307,7 @@
         </div>
 
         <!-- 제주 지도 -->
-        <div id="map-jeju" class="map-box" style="width:100%; height:220px; margin:15px 0; border-radius:8px; overflow:hidden; border:1px solid #333333;"></div>
+        <div id="map-jeju" class="map-box" style="width:100%; height:220px; margin:20px 0; margin-top: 10%; border-radius:8px; overflow:hidden; border:1px solid #333333;"></div>
 
         <!-- 네이버 지도 빠른 길찾기 (제주) -->
         <a href="https://m.map.naver.com/search2/search.naver?query=%EB%8F%99%EC%84%B1%EC%88%98%EC%82%B0" target="_blank" class="map-btn" style="background-color: #eab4b9; color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 0.95rem;">
@@ -1378,7 +1372,7 @@
 </script>
 <!-- 7. 마음 전하실 곳 (Account) 섹션 -->
 <section class="section account-section">
-    <h2 class="section-title">마음 전하실 곳</h2>
+    <h2 class="section-title" style="margin-top: -15%;">마음 전하실 곳</h2>
     <p class="account-notice">
         축하의 마음을 전해주실 분들을 위해<br>계좌 정보를 안내해 드립니다.
     </p>
