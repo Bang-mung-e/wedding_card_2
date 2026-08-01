@@ -391,11 +391,18 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
+            padding: 0 20px;
             margin-top: 30px; 
         }
 
         /* 공통 겹침 간격 설정 */
-        .handwriting-wrapper,
+        .handwriting-wrapper {
+            position: relative;
+            box-sizing: border-box;
+            margin-bottom: -100px; /* 💡 요소 간의 겹침 정도 (필요시 -100px ~ -160px 조절) */
+        }
+
+
         .couple-photo-wrapper {
             position: relative;
             box-sizing: border-box;
@@ -428,7 +435,8 @@
         }
 
         .handwriting-wrapper.jiwon-mother-letter {
-            transform: rotate(1.5deg) translateX(3px);
+            transform: rotate(1.5deg) translateX(-20px) translateY(40px);
+            
             z-index: 7;
         }
 
@@ -454,7 +462,7 @@
         }
 
         .couple-photo-wrapper.couple-photo-4 {
-            transform: rotate(-2.5deg) translateX(270px) translateY(-130px);
+            transform: rotate(-2.5deg) translateX(220px) translateY(-100px);
             z-index: 8; /* 지원모 편지 맨 위 */
         }
 
