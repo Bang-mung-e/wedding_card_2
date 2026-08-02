@@ -1728,6 +1728,37 @@
     document.addEventListener('touchstart', handleFirstInteraction);
 </script>
     
+<!-- 1. 카카오 SDK 로드 -->
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.1/kakao.min.js" integrity="sha384-kD1A1A8p4f99p91r5bK38XNqB3i+4qS" crossorigin="anonymous"></script>
+
+<script>
+  // 2. 카카오 SDK 초기화
+  Kakao.init('2c37634e027cd8c31374ebd6fd5590fa');
+
+  // 3. 메시지 템플릿 전송 함수
+  function shareKakao() {
+    Kakao.Share.sendCustom({
+      templateId: 135880,
+    });
+  }
+</script>
+
+<!-- 4. 공유 버튼 (onclick 추가) -->
+<div style="text-align: center; margin: 30px 0;">
+    <button id="kakaotalk-sharing-btn" onclick="shareKakao()" style="
+        padding: 14px 28px;
+        background-color: #FEE500;
+        color: #191919;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 15px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    ">
+        카카오톡으로 초대장 공유하기
+    </button>
+</div>
 
 </body>
 </html>
